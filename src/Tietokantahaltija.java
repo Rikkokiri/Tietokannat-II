@@ -2,10 +2,22 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Tietokantahaltija{
+	
+	private static Connection connection = null;
 
 	public static void main(String[] args){
 		
-		Connection connection = null;
+		//Form connection to the database
+		formDatabaseConnection();
+
+	}
+	
+	
+	
+	/**
+	 * Method for forming the connection to the database.
+	 */
+	public static void formDatabaseConnection(){ //The method could also return a boolean?
 		
 		try{
 			Class.forName("org.sqlite.JBC");
