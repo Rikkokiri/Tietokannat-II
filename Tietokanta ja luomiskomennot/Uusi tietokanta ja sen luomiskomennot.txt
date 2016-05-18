@@ -1,0 +1,44 @@
+sqlite3 frisbee.db
+
+CREATE TABLE Pelaaja(
+	pelaajan_id INT PRIMARY KEY NOT NULL,
+	nimi TEXT NOT NULL,
+	puhnum INT NOT NULL,
+	kotipaikka CHAR(30) NOT NULL
+);
+
+CREATE TABLE Peli(
+	pelin_id INT PRIMARY KEY NOT NULL,
+	radan_id INT NOT NULL,
+	paivamaara CHAR(10) NOT NULL
+);
+
+CREATE TABLE Pelaamassa(
+	pelin_id INT NOT NULL,
+	pelaajan_id INT NOT NULL
+);
+
+CREATE TABLE Suoritus(
+	pelaajan_id INT PRIMARY KEY NOT NULL,
+	pelin_id INT NOT NULL,SELE
+	radan_id INT NOT NULL,
+	vaylannumero INT NOT NULL,
+	heittojen_lkm INT NOT NULL
+);
+
+CREATE TABLE Vayla(
+	radan_id NOT NULL,
+	par INT NOT NULL,
+	numero INT NOT NULL,
+	pituus INT NOT NULL
+	PRIMARY KEY(radan_id, numero)
+);
+
+
+CREATE TABLE RATA(
+	radan_id INT PRIMARY KEY NOT NULL,
+	luokitus CHAR(4) NOT NULL,
+	vaylien_lkm INT NOT NULL,
+	osoite CHAR(40) NOT NULL,
+	ratamestari TEXT NOT NULL
+);
