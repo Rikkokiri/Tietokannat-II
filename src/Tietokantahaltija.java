@@ -1,7 +1,7 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
 
-public class Tietokantahaltija{
+public class Tietokantahaltija implements TietokantaRajapinta {
 	
 	private static Connection connection = null;
 
@@ -20,5 +20,7 @@ public class Tietokantahaltija{
 		System.out.println("Opened database successfully. Yasss.");
 	}
 	//-------------------------------------------
+	
+	
 	
 }
