@@ -35,7 +35,7 @@ public interface TietokantaRajapinta {
 	
 	//------ Peli ------------
 	
-	public boolean luoPeli()
+	public boolean luoPeli();
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	
