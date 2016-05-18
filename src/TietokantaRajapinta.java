@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 
 public interface TietokantaRajapinta {
 
@@ -25,7 +26,8 @@ public interface TietokantaRajapinta {
 	 * LUOKITUS CHAR(4)
 	 * OSOITE CHAR(40)
 	 */
-	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari);
+	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari)
+	throws SQLException;
 	
 	
 	
