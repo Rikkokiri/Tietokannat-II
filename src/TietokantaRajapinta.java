@@ -37,7 +37,7 @@ public interface TietokantaRajapinta {
 	
 	//------ Peli ------------
 	
-	public boolean luoPeli();
+	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException;
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	

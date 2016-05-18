@@ -62,8 +62,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public boolean luoPeli() {
-		// TODO Auto-generated method stub
+	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException {
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
+				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
 		return false;
 	}
 	
