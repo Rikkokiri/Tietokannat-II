@@ -30,12 +30,12 @@ CREATE TABLE Vayla(
 	radan_id NOT NULL,
 	par INT NOT NULL,
 	numero INT NOT NULL,
-	pituus INT NOT NULL
+	pituus INT NOT NULL,
 	PRIMARY KEY(radan_id, numero)
 );
 
 
-CREATE TABLE RATA(
+CREATE TABLE Rata(
 	radan_id INT PRIMARY KEY NOT NULL,
 	luokitus CHAR(4) NOT NULL,
 	vaylien_lkm INT NOT NULL,
