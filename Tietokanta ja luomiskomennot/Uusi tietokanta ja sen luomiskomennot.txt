@@ -10,6 +10,7 @@ CREATE TABLE Pelaaja(
 
 CREATE TABLE Rata(
 	radan_id INT NOT NULL,
+	nimi TEXT NOT NULL,
 	luokitus CHAR(4) NOT NULL,
 	vaylien_lkm INT NOT NULL,
 	osoite CHAR(40) NOT NULL,
