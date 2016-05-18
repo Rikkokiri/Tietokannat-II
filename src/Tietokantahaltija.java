@@ -21,13 +21,16 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	//-------------------------------------------
 
 	@Override
-	public boolean luoPelaaja(int pelaajanID, String pelaajanNimi, int puhnum, String kotipaikka) {
+	public boolean luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) {
 		Statement stmt = null;
 		try{
 			stmt = connection.createStatement();
-			String sql = "INSERT INTO Pelaaja";
+			String sql = "INSERT INTO Pelaaja VALUES (" + pelaajanID + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
 		}catch(Exception e) {
-			
+			e.printStackTrace();
 		}
 		
 		return false;

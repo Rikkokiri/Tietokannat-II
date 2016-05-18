@@ -10,7 +10,7 @@ public interface TietokantaRajapinta {
 	
 	//------ Pelaaja ------------
 	
-	public boolean luoPelaaja(int pelaajanID, String pelaajanNimi, int puhnum, String kotipaikka);
+	public boolean luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka);
 	
 	public boolean poistaPelaaja(int pelaajanID);
 	
