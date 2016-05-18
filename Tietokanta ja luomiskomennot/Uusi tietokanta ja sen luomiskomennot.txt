@@ -42,3 +42,56 @@ CREATE TABLE Rata(
 	osoite CHAR(40) NOT NULL,
 	ratamestari TEXT NOT NULL
 );
+
+
+
+
+.o.o.o.o.o.o. TIETOJEN LISÄYKSIÄ TIETOKANTAAN .o.o.o.o.o.o.
+
+
+INSERT INTO Pelaaja(pelaajan_id, nimi, puhnum, kotipaikka)
+	VALUES(141293, 'Ville', 0123456789, 'M‰rynummi');
+
+
+INSERT INTO Pelaaja(pelaajan_id, nimi, puhnum, kotipaikka)
+	VALUES(12071994, 'Pilvi', 9876543210, 'Elim‰ki');
+
+
+INSERT INTO Pelaaja(pelaajan_id, nimi, puhnum, kotipaikka)
+	VALUES(07041995, 'Antti', 1324354657, 'Porvoo');
+
+
+INSERT INTO Pelaaja(pelaajan_id, nimi, puhnum, kotipaikka)
+	VALUES(12071995, 'Juho', 0908978675, 'Loppi');
+
+
+INSERT INTO Rata (radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)
+	VALUES(12760, 'Marttilan frisbeegolfrata', 'BB1', 9, 'Martintalo', 'Lasse Bergroth');
+
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 1, 92);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 2, 129);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 3, 84);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 4, 124);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 5, 102);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 4, 6, 162);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 7, 79);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 8, 85);
+
+INSERT INTO Vayla(radan_id, par, numero, pituus)
+	VALUES(12760, 3, 9, 58);
