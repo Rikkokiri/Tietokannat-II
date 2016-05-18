@@ -1,5 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class Tietokantahaltija implements TietokantaRajapinta {
 	
@@ -11,7 +10,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		try{
 			Class.forName("org.sqlite.JBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:frisbee.db");
-			
+			connection.setAutoCommit(false);
 		} catch (Exception e){
 			System.err.println( e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0); //This or something else?
@@ -23,7 +22,14 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoPelaaja(int pelaajanID, String pelaajanNimi, int puhnum, String kotipaikka) {
-		// TODO Auto-generated method stub
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "INSERT INTO Pelaaja";
+		}catch(Exception e) {
+			
+		}
+		
 		return false;
 	}
 
@@ -47,7 +53,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)");
 		return false;
 	}
 
