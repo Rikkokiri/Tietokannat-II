@@ -1,5 +1,6 @@
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.Statement;
 
 public class Tietokantahaltija implements TietokantaRajapinta {
 	
@@ -47,7 +48,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)");
 		return false;
 	}
 
