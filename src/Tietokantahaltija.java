@@ -52,10 +52,13 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) {
+	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)");
-		return false;
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)" +
+				"VALUES (" + radanID + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
+				");");
+		connection.commit();
+		return true;
 	}
 
 	@Override
