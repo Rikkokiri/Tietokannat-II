@@ -44,8 +44,31 @@ public interface TietokantaRajapinta {
 	
 	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException;
 	
+	//Pitäisikö peli kuitenkin voida poistaa?
+	
+	//Seuraavat koskevat Pelaamassa-taulua...
+	/*
+	 * CREATE TABLE Pelaamassa(
+	pelin_id INT NOT NULL,
+	pelaajan_id INT NOT NULL,
+	FOREIGN KEY(pelin_id) REFERENCES Peli(pelin_id),
+	FOREIGN KEY(pelaajan_id) REFERENCES Pelaaja(pelaajan_id)
+	);
+	 */
+	
+	public boolean pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException;
+	
+	public boolean poistaPelaajaPelista() throws SQLException;
 	
 	//------ Suoritus ----------
+	public boolean luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
+	
+	//Kai suorituksen poistamisen pitää olla mahdollista?
+	public boolean poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException;
+	
+	//Suorituksen muuttamisen/korjaamisen mahdollistavia metodeita?
+	//Tarpeettomia?
+	//public boolean korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	

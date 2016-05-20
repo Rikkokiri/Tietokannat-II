@@ -71,6 +71,43 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
 		return false;
 	}
+
+	@Override
+	public boolean vaihdaRatamestari(String uusiRatamestari) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean luoVäylä(int radan_id, int par, int numero, int pituus) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean poistaPelaajaPelista() throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	
