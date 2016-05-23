@@ -72,12 +72,15 @@ public interface TietokantaRajapinta {
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	
+		//Pitäisikö näiden palauttaa ResultSet vai tulostaa haun tulokset? Vai antaa palaute jossain muussa muodossa?
+	
 	//Suunnitelmassa on luvattu seuraavat haut:
 	
 	//>> Yksittäisen pelin lopputulos (listaus yksittäisten pelaajien kokonaistuloksista tietyssä pelissä) ja pelin voittaja
+	public void pelinLopputulos(int pelin_id) throws SQLException;
 	
 	//>> Jonkin radan ennätyssuoritus
-	
+	public void radanEnnatys(int radan_id) throws SQLException;
 	
 	//>> Yksittäisen pelaajan keskiarvotulos jollakin tietyllä väylällä (tieto ei tietenkään ole järin mielenkiintoinen, jos pelaajalla on vain muutama tulos väylältä)
 	 

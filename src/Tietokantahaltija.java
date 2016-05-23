@@ -108,6 +108,47 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	@Override
+	/**
+	 * Palauttaa listauksen yksittäisten pelaajien kokonaistuloksista pelissä pelin_id.
+	 * 
+	 */
+	
+	//Työn alla! :) - Pilvi 
+	
+	public void pelinLopputulos(int pelin_id) throws SQLException {
+		// TODO Auto-generated method stub
+		
+		Statement statement = null;
+		
+		try{
+			
+			statement = connection.createStatement();
+			
+			String sqlQuery = "";
+			
+			ResultSet queryResults = statement.executeQuery(sqlQuery);
+			
+			//Print or return something?
+			
+			statement.close();
+			connection.commit();
+			
+		} catch (Exception e){
+			
+			//TODO Mitä tehdään, jos kysely ei jostain syystä onnistunut?
+			//Heitetäänkö poikkeus vai palautetaanko metodin käyttäjälle jokin arvo?
+			
+		}
+		
+	}
+
+	@Override
+	public void radanEnnatys(int radan_id) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
