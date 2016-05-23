@@ -68,7 +68,8 @@ public interface TietokantaRajapinta {
 	
 	//Suorituksen muuttamisen/korjaamisen mahdollistavia metodeita?
 	//Tarpeettomia?
-	//public boolean korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
+	// - Hyvinkin tarpeellisia, aika monta kertaa merkannut vahingossa v‰‰rin -Ville
+	public boolean korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	

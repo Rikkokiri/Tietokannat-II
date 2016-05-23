@@ -71,7 +71,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
-		return false;
+		connection.commit();
+		return true;
 	}
 
 	@Override
@@ -80,11 +81,15 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		return false;
 	}
 
-	// Teen vaikka tämän -Ville
 	@Override
 	public boolean luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
+		//TODO ID:n autogeneointi?
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Vayla(radan_id, par, numero, pituus)" +
+				"VALUES (" + radan_id + "," + par + "," + numero + "," + pituus +
+				");");
+		connection.commit();
+		return true;
 	}
 
 	@Override
