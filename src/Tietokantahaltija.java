@@ -56,6 +56,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
+		//TODO ID:n autogenerointi
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)" +
 				"VALUES (" + radanID + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
@@ -66,6 +67,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException {
+		//TODO ID:n auto generointi. T‰ll‰ hetkell‰ oittaa vaan random luvun
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
@@ -78,8 +80,9 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		return false;
 	}
 
+	// Teen vaikka t‰m‰n -Ville
 	@Override
-	public boolean luoV√§yl√§(int radan_id, int par, int numero, int pituus) throws SQLException {
+	public boolean luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException {
 		// TODO Auto-generated method stub
 		return false;
 	}

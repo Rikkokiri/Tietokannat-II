@@ -38,7 +38,7 @@ public interface TietokantaRajapinta {
 	
 	//------ Väylä ------------
 	
-	public boolean luoVäylä(int radan_id, int par, int numero, int pituus) throws SQLException;
+	public boolean luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException;
 	
 	//------ Peli ------------
 	
