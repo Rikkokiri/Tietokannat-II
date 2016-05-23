@@ -1,0 +1,20 @@
+Lopputuloksena halutaan näyttää pelaajien nimet ja kokonaistulokset
+
+SELECT nimi
+
+
+
+SELECT SUM(heittojen_lkm) AS kokonaistulos
+FROM Suoritus
+WHERE pelaajan_id IN (
+	SELECT pelaajan_id
+	FROM Pelaamassa
+	WHERE pelin_id == ???)
+GROUP BY pelaajan_id
+
+
+
+
+"SELECT SUM(heittojen_lkm) AS kokonaistulos"
+					+ "FROM"
+					+ "WHERE";
