@@ -72,6 +72,20 @@ public interface TietokantaRajapinta {
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	
+	//Suunnitelmassa on luvattu seuraavat haut:
+	
+	//>> Yksittäisen pelin lopputulos (listaus yksittäisten pelaajien kokonaistuloksista tietyssä pelissä) ja pelin voittaja
+	
+	//>> Jonkin radan ennätyssuoritus
+	
+	
+	//>> Yksittäisen pelaajan keskiarvotulos jollakin tietyllä väylällä (tieto ei tietenkään ole järin mielenkiintoinen, jos pelaajalla on vain muutama tulos väylältä)
+	 
+	 
+	
+	//Lisäksi voitaisiin valmiiksi toteuttaa...
+	
+		//Ideoita?
 	
 	
 }
