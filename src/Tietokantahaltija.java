@@ -211,7 +211,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public ResultSet PelaajanTiedot(int pelaaja_id) throws SQLException {
+	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -237,5 +237,23 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				");");
 		connection.commit();
 		
+	}
+
+	@Override
+	public ResultSet radanTiedot(int radan_id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
