@@ -1,3 +1,4 @@
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public interface TietokantaRajapinta {
@@ -14,15 +15,15 @@ public interface TietokantaRajapinta {
 	
 	//------ Pelaaja ------------
 	
-	public boolean luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
+	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
 	
 	//Voiko pelaajan itse asiassa poistaa?
 	//Tätäkin täytyy pohtia.
-	public boolean poistaPelaaja(int pelaajanID) throws SQLException;
+	public void poistaPelaaja(int pelaajanID) throws SQLException;
 	
-	public boolean vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException;
+	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException;
 	
-	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException;
+	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException;
 	
 	//------ Rata ------------
 	
@@ -32,17 +33,17 @@ public interface TietokantaRajapinta {
 	 * LUOKITUS CHAR(4)
 	 * OSOITE CHAR(40)
 	 */
-	public boolean luoRata(int radan_id, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+	public void luoRata(int radan_id, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
 	
-	public boolean vaihdaRatamestari(String uusiRatamestari) throws SQLException;
+	public void vaihdaRatamestari(String uusiRatamestari) throws SQLException;
 	
 	//------ Väylä ------------
 	
-	public boolean luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException;
+	public void luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException;
 	
 	//------ Peli ------------
 	
-	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException;
+	public void luoPeli(int radan_id, String paivamaara) throws SQLException;
 	
 	//Pitäisikö peli kuitenkin voida poistaa?
 	
@@ -56,20 +57,20 @@ public interface TietokantaRajapinta {
 	);
 	 */
 	
-	public boolean pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException;
+	public void pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException;
 	
-	public boolean poistaPelaajaPelista() throws SQLException;
+	public void poistaPelaajaPelista() throws SQLException;
 	
 	//------ Suoritus ----------
-	public boolean luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
+	public void luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
 	
 	//Kai suorituksen poistamisen pitää olla mahdollista?
-	public boolean poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException;
+	public void poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException;
 	
 	//Suorituksen muuttamisen/korjaamisen mahdollistavia metodeita?
 	//Tarpeettomia?
 	// - Hyvinkin tarpeellisia, aika monta kertaa merkannut vahingossa v��rin -Ville
-	public boolean korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
+	public void korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
 	
 	//.o.o.o.o.o.o.o.o.o.o.o.o. YKSINKERTAISET HAUT .o.o.o.o.o.o.o.o.o.o.o.o.
 	
@@ -78,14 +79,14 @@ public interface TietokantaRajapinta {
 	//Suunnitelmassa on luvattu seuraavat haut:
 	
 	//>> Yksittäisen pelin lopputulos (listaus yksittäisten pelaajien kokonaistuloksista tietyssä pelissä) ja pelin voittaja
-	public void pelinLopputulos(int pelin_id) throws SQLException;
+	public ResultSet pelinLopputulos(int pelin_id) throws SQLException;
 	
 	//>> Jonkin radan ennätyssuoritus
-	public void radanEnnatys(int radan_id) throws SQLException;
+	public ResultSet radanEnnatys(int radan_id) throws SQLException;
 	
 	//>> Yksittäisen pelaajan keskiarvotulos jollakin tietyllä väylällä (tieto ei tietenkään ole järin mielenkiintoinen, jos pelaajalla on vain muutama tulos väylältä)
 	 
-	 
+	public ResultSet PelaajanTiedot(int pelaaja_id) throws SQLException;
 	
 	//Lisäksi voitaisiin valmiiksi toteuttaa...
 	

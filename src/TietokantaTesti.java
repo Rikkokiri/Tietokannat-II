@@ -3,15 +3,15 @@ import java.sql.*;
 
 public class TietokantaTesti {
 
-	
+	public static Tietokantahaltija tkh;
 	
 	public static void main(String[] args){
 		
-		//TODO Pitääkö testissä tehdä oma connection, vai tehäänkö Tietokantahaltija.getConnection()?
+		//TODO Pitï¿½ï¿½kï¿½ testissï¿½ tehdï¿½ oma connection, vai tehï¿½ï¿½nkï¿½ Tietokantahaltija.getConnection()?
 		Connection connection = null;
 		
 		try{
-			Tietokantahaltija tkh = new Tietokantahaltija();
+			tkh = new Tietokantahaltija();
 			connection = tkh.getConnection();
 			
 			// Tulostetaan kaikki taulut
@@ -100,4 +100,12 @@ public class TietokantaTesti {
 	
 	}
 	
+	
+	public void TulostaPelinTulos(int pelin_id){
+		
+		tkh.
+		
+	}
+	
+
 }
