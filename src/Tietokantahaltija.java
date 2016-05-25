@@ -126,7 +126,15 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException {
 		Statement statement = null;
 		statement = connection.createStatement();
-		String sqlQuery = "";
+		String sqlQuery = "SELECT Pelaaja.nimi, kokonaistulos"
+						+ "FROM Pelaaja, Suoritus"
+						+ "WHERE Suoritus.pelin_id =" + pelin_id 
+						+ "AND Pelaaja.id = Suoritus.pelaajan_id"
+						+ "AND kokonaistulos = ( SUM(heittojen_lkm)"
+						+ "FROM Suoritus"
+						+ "GROUP BY pelaajan_id)"
+						+ "ORDER BY kokonaistulos;";
+					
 		ResultSet queryResults = statement.executeQuery(sqlQuery);
 		//Print or return something?
 		statement.close();
