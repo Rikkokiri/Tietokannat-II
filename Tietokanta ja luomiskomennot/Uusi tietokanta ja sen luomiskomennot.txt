@@ -1,4 +1,4 @@
-sqlite3 frisbee.db
+﻿sqlite3 frisbee.db
 
 CREATE TABLE Pelaaja(
 	pelaajan_id INT NOT NULL,
@@ -108,3 +108,75 @@ INSERT INTO Vayla(radan_id, par, numero, pituus)
 
 INSERT INTO Vayla(radan_id, par, numero, pituus)
 	VALUES(12760, 3, 9, 58);
+
+
+----- Lisätään yksi peli ------
+
+
+INSERT INTO Peli(pelin_id, radan_id, paivamaara)
+	VALUES(000001, 12760, '25.05.2016');
+
+
+INSERT INTO Pelaamassa(pelin_id, pelaajan_id)
+	VALUES(000001, 141293);
+
+INSERT INTO Pelaamassa(pelin_id, pelaajan_id)
+	VALUES(000001, 12071994);
+
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 1, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 2, 4);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 3, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 4, 4);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 5, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 6, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 7, 2);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 8, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(141293, 000001, 12760, 9, 1);
+
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 1, 1);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 2, 5);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 3, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 4, 3);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 5, 4);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 6, 4);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 7, 2);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 8, 2);
+
+INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)
+	VALUES(12071994, 000001, 12760, 9, 3);
+
+
