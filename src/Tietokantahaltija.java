@@ -252,7 +252,9 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet radanTiedot(int radan_id) throws SQLException {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Rata WHERE radan_id = "+radan_id+";";
+		stmt.executeQuery(sql);
 		return null;
 	}
 
