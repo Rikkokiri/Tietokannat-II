@@ -38,20 +38,59 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean poistaPelaaja(int pelaajanID) {
-		// TODO Auto-generated method stub
-		return false;
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//Tästä johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, täten palautetaan true
+		return true;
 	}
 
 	@Override
 	public boolean vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) {
-		// TODO Auto-generated method stub
-		return false;
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//Tästä johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, täten palautetaan true
+		return true;
 	}
 
 	@Override
-	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, int uusiKotipaikka) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) {
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//Tästä johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, täten palautetaan true
+		return true;
 	}
 
 	@Override

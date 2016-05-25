@@ -22,7 +22,7 @@ public interface TietokantaRajapinta {
 	
 	public boolean vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException;
 	
-	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, int uusiKotipaikka) throws SQLException;
+	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException;
 	
 	//------ Rata ------------
 	
