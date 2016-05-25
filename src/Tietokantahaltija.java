@@ -217,8 +217,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Pelaaja WHERE pelaaja_id = "+pelaaja_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 	
 	public Connection getConnection(){
