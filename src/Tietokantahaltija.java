@@ -19,6 +19,44 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		System.out.println("Opened database successfully. Yasss.");
 	}
 	//-------------------------------------------
+	
+	/**
+	 * Generoi uuden int-tyyppisen arvon parametrina annetulle taulun uudelle arvolle
+	 * @param name
+	 * @return
+	 * @throws SQLException
+	 */
+	public int generoiID(String name) throws SQLException{
+		Statement stmt = null;
+		stmt = connection.createStatement();
+		String idSarake = "";
+		switch (name) {
+		case "Pelaaja":
+			idSarake = "pelaajan_id";
+			break;
+
+		case "Rata":
+			idSarake = "radan_id";
+			break;
+			
+		case "Peli":
+			idSarake = "pelin_id";
+			break;
+			
+		default:
+			System.out.println("Nope nope nope");
+			break;
+		}
+		String sql = "SELECT "+idSarake+" FROM " +name+" WHERE "+idSarake+"=(SELECT max("+idSarake+") FROM "+name+");";
+		
+		ResultSet queryResults = stmt.executeQuery(sql);
+		int tmp = queryResults.getInt(idSarake);
+		tmp++;
+		//Print or return something?
+		stmt.close();
+		connection.commit();
+		return tmp;
+	}
 
 	@Override
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
@@ -76,7 +114,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
-				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
+				"VALUES(" + generoiID("Peli") + "," + radan_id + "," + paivamaara + ")");
 		connection.commit();
 	}
 
@@ -138,6 +176,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet radanEnnatys(int radan_id) throws SQLException {
 		// TODO Auto-generated method stub
 		ResultSet queryResults = null;
+		Statement stmt = null;
+		stmt = connection.createStatement();
+		queryResults = stmt.executeQuery("SELECT * FROM SUORITUS WHERE RadanID = "+radan_id+" AND Heittojen_lkm = SELECT MIN(Heittojen_lkm) FROM SUORITUS WHERE RadanID = "+radan_id+";");
+		stmt.close();
 		return queryResults;
 	}
 
@@ -155,5 +197,25 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	
 	public Connection getConnection(){
 		return connection;
+	}
+	
+	@Override
+	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
+		Statement stmt = null;
+		stmt = connection.createStatement();
+		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		connection.commit();
+		
+	}
+	@Override
+	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)" +
+				"VALUES (" + generoiID("Rata") + "," + luokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
+				");");
+		connection.commit();
+		
 	}
 }

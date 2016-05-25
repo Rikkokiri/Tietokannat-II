@@ -14,15 +14,48 @@ public interface TietokantaRajapinta {
 	//.o.o.o.o.o.o.o.o.o.o.o.o. LUOMIS-, POISTAMIS- JA PÃ„IVITYSMETODIT .o.o.o.o.o.o.o.o.o.o.o.o.
 	
 	//------ Pelaaja ------------
-	
+	/**
+	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
+	 * @param pelaajanID Pelaajan ID
+	 * @param pelaajanNimi String
+	 * @param puhnum String, maksimissaan 13 merkkiä
+	 * @param kotipaikka String, maksimissaan 30 merkkiä
+	 * @throws SQLException
+	 */
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
 	
-	//Voiko pelaajan itse asiassa poistaa?
-	//TÃ¤tÃ¤kin tÃ¤ytyy pohtia.
+	
+	/**
+	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
+	 * METODIN TÄYTYY GENEROIDA SEURAAVA VAPAA ID
+	 * @param pelaajanNimi String
+	 * @param puhnum String, maksimissaan 13 merkkiä
+	 * @param kotipaikka String, maksimissaan 30 merkkiä
+	 * @throws SQLException
+	 */
+	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
+	
+	/**
+	 * Poistetaan parametrina annettu pelaaja edellyttäen ettei kyseistä pelaajaa ilmene muissa tauluissa
+	 * @param pelaajanID
+	 * @throws SQLException
+	 */
 	public void poistaPelaaja(int pelaajanID) throws SQLException;
 	
+	/**
+	 * Vaihdetaan parametrina annetun pelaajan puhelinnumero parametrina annetuksi
+	 * @param pelaajanID
+	 * @param uusiPuhnum String, maksimissaan 13 merkkiä
+	 * @throws SQLException
+	 */
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException;
 	
+	/**
+	 * Vaihtaa parametrina annetun pelaajan kotipaikka parametrina annetuksi
+	 * @param pelaajanID
+	 * @param uusiKotipaikka String, maksimissaan 30 merkkiä
+	 * @throws SQLException
+	 */
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException;
 	
 	//------ Rata ------------
@@ -33,7 +66,27 @@ public interface TietokantaRajapinta {
 	 * LUOKITUS CHAR(4)
 	 * OSOITE CHAR(40)
 	 */
+	/**
+	 * 
+	 * @param radan_id int
+	 * @param luokitus
+	 * @param vaylienLkm
+	 * @param osoite
+	 * @param ratamestari
+	 * @throws SQLException
+	 */
 	public void luoRata(int radan_id, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+	
+	/**
+	 * 
+	 * @param luokitus
+	 * @param vaylienLkm
+	 * @param osoite
+	 * @param ratamestari
+	 * @throws SQLException
+	 */
+	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+
 	
 	public void vaihdaRatamestari(String uusiRatamestari) throws SQLException;
 	
