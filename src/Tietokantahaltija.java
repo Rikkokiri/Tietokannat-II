@@ -8,7 +8,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	public Tietokantahaltija(){
 		try{
-			Class.forName("org.sqlite.JBC");
+			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:frisbee.db");
 			connection.setAutoCommit(false);
 		} catch (Exception e){
@@ -34,31 +34,82 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public void poistaPelaaja(int pelaajanID) throws SQLException {
 		Statement stmt = null;
+<<<<<<< HEAD
 		stmt = connection.createStatement();
 		String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		connection.commit();
+=======
+		try{
+			stmt = connection.createStatement();
+			String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//Tï¿½stï¿½ johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, tï¿½ten palautetaan true
+		return true;
+>>>>>>> origin/master
 	}
 
 	@Override
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException {
 		Statement stmt = null;
+<<<<<<< HEAD
 		stmt = connection.createStatement();
 		String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		connection.commit();
+=======
+		try{
+			stmt = connection.createStatement();
+			String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//Tï¿½stï¿½ johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, tï¿½ten palautetaan true
+		return true;
+>>>>>>> origin/master
 	}
 
 	@Override
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException {
 		Statement stmt = null;
+<<<<<<< HEAD
 		stmt = connection.createStatement();
 		String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		stmt.close();
 		connection.commit();
+=======
+		try{
+			stmt = connection.createStatement();
+			String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//Tï¿½stï¿½ johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, tï¿½ten palautetaan true
+		return true;
+>>>>>>> origin/master
 	}
 
 	@Override
@@ -71,8 +122,13 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
 		//TODO ID:n auto generointi. Tällä hetkellä oittaa vaan random luvun
+=======
+	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException {
+		//TODO ID:n auto generointi. Tï¿½llï¿½ hetkellï¿½ oittaa vaan random luvun
+>>>>>>> origin/master
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
@@ -125,12 +181,28 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException {
 		Statement statement = null;
 		statement = connection.createStatement();
+<<<<<<< HEAD
 		String sqlQuery = "";
 		ResultSet queryResults = statement.executeQuery(sqlQuery);
 		//Print or return something?
 		statement.close();
 		connection.commit();
 		return queryResults;
+=======
+			
+		String sqlQuery = "FROM Pelaaja, Suoritus"
+						+ "WHERE Suoritus.pelin_id =" + pelin_id
+								+ "AND Pelaaja.id = Suoritus.pelaajan_id"
+								+ "AND kokonaistulos = ( SUM(heittojen_lkm)"
+						+ "FROM Suoritus"
+						+ "GROUP BY pelaajan_id)"
+						+ "ORDER BY kokonaistulos;";
+			
+		ResultSet queryResults = statement.executeQuery(sqlQuery);
+		statement.close();
+		connection.commit();
+		
+>>>>>>> origin/master
 	}
 
 	@Override
@@ -145,6 +217,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 			throws SQLException {
 		// TODO Auto-generated method stub
 	}
+<<<<<<< HEAD
 
 	@Override
 	public ResultSet PelaajanTiedot(int pelaaja_id) throws SQLException {
@@ -154,4 +227,12 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 
 
+=======
+	
+	public Connection getConnection(){
+		return connection;
+	}
+	
+	
+>>>>>>> origin/master
 }
