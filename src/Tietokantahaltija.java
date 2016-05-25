@@ -73,7 +73,11 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void poistaPelaaja(int pelaajanID) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "DELETE FROM Pelaaja WHERE pelaajan_id ="+ pelaajanID +";";
+		String sql = "DELETE FROM Pelaaja " +
+				"WHERE pelaaja_id=" + pelaajanID +
+				" AND NOT EXISTS( SELECT * FROM Pelaamassa, Suoritus "+
+				"WHERE Pelaamassa.pelaajan_id=" + pelaajanID +
+				" AND Suoritus.pelaajan_id=" + pelaajanID + ");";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
