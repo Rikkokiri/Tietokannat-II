@@ -53,8 +53,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		int tmp = queryResults.getInt(idSarake);
 		tmp++;
 		//Print or return something?
-		stmt.close();
 		connection.commit();
+		stmt.close();
 		return tmp;
 	}
 
@@ -64,8 +64,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "INSERT INTO Pelaaja VALUES (" + pelaajanID + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 
 	}
 
@@ -75,8 +75,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -85,8 +85,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -95,8 +95,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -106,6 +106,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				"VALUES (" + radanID + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
 				");");
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -116,11 +117,16 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + generoiID("Peli") + "," + radan_id + "," + paivamaara + ")");
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
-	public void vaihdaRatamestari(String uusiRatamestari) throws SQLException {
-		// TODO Auto-generated method stub
+	public void vaihdaRatamestari(int radan_id, String uusiRatamestari) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String SQL = "UPDATE RATE SET ratamestari="+uusiRatamestari+" WHERE radan_id="+radan_id+";";
+		stmt.executeUpdate(SQL);
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -131,6 +137,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				"VALUES (" + radan_id + "," + par + "," + numero + "," + pituus +
 				");");
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -167,8 +174,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		String sqlQuery = "";
 		ResultSet queryResults = statement.executeQuery(sqlQuery);
 		//Print or return something?
-		statement.close();
 		connection.commit();
+		statement.close();
 		return queryResults;
 	}
 
@@ -205,9 +212,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
-		
+		stmt.close();
 	}
 	@Override
 	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {

@@ -88,7 +88,7 @@ public interface TietokantaRajapinta {
 	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
 
 	
-	public void vaihdaRatamestari(String uusiRatamestari) throws SQLException;
+	public void vaihdaRatamestari(int radan_id ,String uusiRatamestari) throws SQLException;
 	
 	//------ Väylä ------------
 	
