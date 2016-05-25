@@ -48,13 +48,15 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 			System.out.println("Nope nope nope");
 			break;
 		}
-		String sql = "SELECT "+idSarake+" FROM " +name+" WHERE ID=(SELECT max(ID) FROM ANIME);";
+		String sql = "SELECT "+idSarake+" FROM " +name+" WHERE "+idSarake+"=(SELECT max("+idSarake+") FROM "+name+");";
 		
 		ResultSet queryResults = stmt.executeQuery(sql);
+		int tmp = queryResults.getInt(idSarake);
+		tmp++;
 		//Print or return something?
 		stmt.close();
 		connection.commit();
-		return queryResults.getInt(idSarake);
+		return tmp;
 	}
 
 	@Override
