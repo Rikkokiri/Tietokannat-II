@@ -53,8 +53,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		int tmp = queryResults.getInt(idSarake);
 		tmp++;
 		//Print or return something?
-		stmt.close();
 		connection.commit();
+		stmt.close();
 		return tmp;
 	}
 
@@ -64,8 +64,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "INSERT INTO Pelaaja VALUES (" + pelaajanID + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 
 	}
 
@@ -73,30 +73,34 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void poistaPelaaja(int pelaajanID) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
+		String sql = "DELETE FROM Pelaaja " +
+				"WHERE pelaaja_id=" + pelaajanID +
+				" AND NOT EXISTS( SELECT * FROM Pelaamassa, Suoritus "+
+				"WHERE Pelaamassa.pelaajan_id=" + pelaajanID +
+				" AND Suoritus.pelaajan_id=" + pelaajanID + ");";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
+		String sql = "UPDATE Pelaaja SET puhnum = " + uusiPuhnum + " WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
+		String sql = "UPDATE Pelaaja SET kotipaikka = " + uusiKotipaikka + " WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -106,6 +110,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				"VALUES (" + radanID + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
 				");");
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -116,11 +121,16 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + generoiID("Peli") + "," + radan_id + "," + paivamaara + ")");
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
-	public void vaihdaRatamestari(String uusiRatamestari) throws SQLException {
-		// TODO Auto-generated method stub
+	public void vaihdaRatamestari(int radan_id, String uusiRatamestari) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String SQL = "UPDATE Rata SET ratamestari="+uusiRatamestari+" WHERE radan_id="+radan_id+";";
+		stmt.executeUpdate(SQL);
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -131,26 +141,46 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				"VALUES (" + radan_id + "," + par + "," + numero + "," + pituus +
 				");");
 		connection.commit();
+		stmt.close();
 	}
 
 	@Override
 	public  void pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Pelaamassa(pelin_id , pelaajan_id) "
+				+ "VALUES (" + pelin_id+", " + pelaajan_id+");");
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
-	public void poistaPelaajaPelista() throws SQLException {
-		// TODO Auto-generated method stub
+	public void poistaPelaajaPelista(int pelaaja_id, int peli_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String SQL = "DELETE FROM Pelaamasta WHERE pelaaja_id="+pelaaja_id+" AND peli_id="+peli_id+");";
+		stmt.executeUpdate(SQL);
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
 	public void luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
 			throws SQLException {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		String SQL = "INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)"
+				+ "	VALUE(" + pelaajan_id + "," + pelin_id + "," + radan_id + "," + vaylannumero + "," + heittojen_lkm + ");";
+		stmt.executeUpdate(SQL);
+		connection.commit();
+		stmt.close();
 	}
-
+	
+	//Hoidan -Ville
 	@Override
 	public void poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("DELETE FROM Suoritus WHERE pelaajan_id = " + pelaajan_id + " AND pelin_id=" + pelin_id 
+				+ " AND radan_id=" + radan_id + " AND vaylannumero=" + vaylannumero + ";");
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
@@ -180,25 +210,27 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet radanEnnatys(int radan_id) throws SQLException {
-		// TODO Auto-generated method stub
-		ResultSet queryResults = null;
-		Statement stmt = null;
-		stmt = connection.createStatement();
-		queryResults = stmt.executeQuery("SELECT * FROM SUORITUS WHERE RadanID = "+radan_id+" AND Heittojen_lkm = SELECT MIN(Heittojen_lkm) FROM SUORITUS WHERE RadanID = "+radan_id+";");
-		stmt.close();
+		Statement stmt = connection.createStatement();
+		ResultSet queryResults = stmt.executeQuery("SELECT * FROM Suoritus WHERE radan_id = "+radan_id+" AND heittojen_lkm = SELECT MIN(heittojen_lkm) FROM SUORITUS WHERE radan_id = "+radan_id+";");
 		return queryResults;
 	}
 
 	@Override
 	public void korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
 			throws SQLException {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		String sql = "UPDATE Suoritus set heittojen_lkm = "+heittojen_lkm+" WHERE pelaajan_id = "+pelaajan_id+" AND pelin_id = "+pelin_id+" AND radan_id = "+radan_id+" AND vaylannumero = "+vaylannumero+";";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		connection.commit();
 	}
 
 	@Override
-	public ResultSet PelaajanTiedot(int pelaaja_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Pelaaja WHERE pelaaja_id = "+pelaaja_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 	
 	public Connection getConnection(){
@@ -211,9 +243,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt = connection.createStatement();
 		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
 		stmt.executeUpdate(sql);
-		stmt.close();
 		connection.commit();
-		
+		stmt.close();
 	}
 	@Override
 	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
@@ -223,5 +254,25 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				");");
 		connection.commit();
 		
+	}
+
+	@Override
+	public ResultSet radanTiedot(int radan_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Rata WHERE radan_id = "+radan_id+";";
+		stmt.executeQuery(sql);
+		return null;
+	}
+
+	@Override
+	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
