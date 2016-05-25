@@ -73,7 +73,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void poistaPelaaja(int pelaajanID) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
+		String sql = "DELETE FROM Pelaaja WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -83,7 +83,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
+		String sql = "UPDATE Pelaaja SET puhnum = " + uusiPuhnum + " WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -93,7 +93,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
+		String sql = "UPDATE Pelaaja SET kotipaikka = " + uusiKotipaikka + " WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -123,7 +123,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public void vaihdaRatamestari(int radan_id, String uusiRatamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String SQL = "UPDATE RATE SET ratamestari="+uusiRatamestari+" WHERE radan_id="+radan_id+";";
+		String SQL = "UPDATE Rata SET ratamestari="+uusiRatamestari+" WHERE radan_id="+radan_id+";";
 		stmt.executeUpdate(SQL);
 		connection.commit();
 		stmt.close();
@@ -142,11 +142,20 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public  void pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Pelaamassa(pelin_id , pelaajan_id) "
+				+ "VALUES (" + pelin_id+", " + pelaajan_id+");");
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
-	public void poistaPelaajaPelista() throws SQLException {
-		// TODO Auto-generated method stub
+	public void poistaPelaajaPelista(int pelaaja_id, int peli_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String SQL = "DELETE FROM Peli WHERE pelaaja_id="+pelaaja_id+" AND peli_id="+peli_id+");";
+		stmt.executeUpdate(SQL);
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override

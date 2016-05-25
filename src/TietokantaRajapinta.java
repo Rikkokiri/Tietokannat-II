@@ -112,7 +112,7 @@ public interface TietokantaRajapinta {
 	
 	public void pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException;
 	
-	public void poistaPelaajaPelista() throws SQLException;
+	public void poistaPelaajaPelista(int pelaaja_id, int peli_id) throws SQLException;
 	
 	//------ Suoritus ----------
 	public void luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
