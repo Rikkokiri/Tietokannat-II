@@ -47,11 +47,11 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 			connection.commit();
 		}catch(Exception e) {
 			//Jokin meni pieleen metodissa.
-			//T‰st‰ johtuen poistoa ei toteuteta
+			//TÔøΩstÔøΩ johtuen poistoa ei toteuteta
 			// -> palautetaan false
 			return false;
 		}
-		//Metodin suorittaminen onnistui, t‰ten palautetaan true
+		//Metodin suorittaminen onnistui, tÔøΩten palautetaan true
 		return true;
 	}
 
@@ -66,11 +66,11 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 			connection.commit();
 		}catch(Exception e) {
 			//Jokin meni pieleen metodissa.
-			//T‰st‰ johtuen poistoa ei toteuteta
+			//TÔøΩstÔøΩ johtuen poistoa ei toteuteta
 			// -> palautetaan false
 			return false;
 		}
-		//Metodin suorittaminen onnistui, t‰ten palautetaan true
+		//Metodin suorittaminen onnistui, tÔøΩten palautetaan true
 		return true;
 	}
 
@@ -85,11 +85,11 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 			connection.commit();
 		}catch(Exception e) {
 			//Jokin meni pieleen metodissa.
-			//T‰st‰ johtuen poistoa ei toteuteta
+			//TÔøΩstÔøΩ johtuen poistoa ei toteuteta
 			// -> palautetaan false
 			return false;
 		}
-		//Metodin suorittaminen onnistui, t‰ten palautetaan true
+		//Metodin suorittaminen onnistui, tÔøΩten palautetaan true
 		return true;
 	}
 
@@ -106,7 +106,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException {
-		//TODO ID:n auto generointi. T‰ll‰ hetkell‰ oittaa vaan random luvun
+		//TODO ID:n auto generointi. TÔøΩllÔøΩ hetkellÔøΩ oittaa vaan random luvun
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
@@ -168,26 +168,19 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		// TODO Auto-generated method stub
 		
 		Statement statement = null;
-		
-		try{
+		statement = connection.createStatement();
 			
-			statement = connection.createStatement();
+		String sqlQuery = "FROM Pelaaja, Suoritus"
+						+ "WHERE Suoritus.pelin_id =" + pelin_id
+								+ "AND Pelaaja.id = Suoritus.pelaajan_id"
+								+ "AND kokonaistulos = ( SUM(heittojen_lkm)"
+						+ "FROM Suoritus"
+						+ "GROUP BY pelaajan_id)"
+						+ "ORDER BY kokonaistulos;";
 			
-			String sqlQuery = "";
-			
-			ResultSet queryResults = statement.executeQuery(sqlQuery);
-			
-			//Print or return something?
-			
-			statement.close();
-			connection.commit();
-			
-		} catch (Exception e){
-			
-			//TODO Mit√§ tehd√§√§n, jos kysely ei jostain syyst√§ onnistunut?
-			//Heitet√§√§nk√∂ poikkeus vai palautetaanko metodin k√§ytt√§j√§lle jokin arvo?
-			
-		}
+		ResultSet queryResults = statement.executeQuery(sqlQuery);
+		statement.close();
+		connection.commit();
 		
 	}
 
