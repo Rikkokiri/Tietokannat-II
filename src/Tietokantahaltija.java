@@ -192,19 +192,20 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet radanEnnatys(int radan_id) throws SQLException {
-		// TODO Auto-generated method stub
 		ResultSet queryResults = null;
-		Statement stmt = null;
-		stmt = connection.createStatement();
+		Statement stmt = connection.createStatement();
 		queryResults = stmt.executeQuery("SELECT * FROM SUORITUS WHERE RadanID = "+radan_id+" AND Heittojen_lkm = SELECT MIN(Heittojen_lkm) FROM SUORITUS WHERE RadanID = "+radan_id+";");
-		stmt.close();
 		return queryResults;
 	}
 
 	@Override
 	public void korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
 			throws SQLException {
-		// TODO Auto-generated method stub
+		Statement stmt = connection.createStatement();
+		String sql = "UPDATE Suoritus set heittojen_lkm = "+heittojen_lkm+" WHERE pelaajan_id = "+pelaajan_id+" AND pelin_id = "+pelin_id+" AND radan_id = "+radan_id+" AND vaylannumero = "+vaylannumero+";";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		connection.commit();
 	}
 
 	@Override
