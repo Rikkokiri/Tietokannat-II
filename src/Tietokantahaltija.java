@@ -138,6 +138,14 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet radanEnnatys(int radan_id) throws SQLException {
 		// TODO Auto-generated method stub
 		ResultSet queryResults = null;
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			queryResults = stmt.executeQuery("SELECT * FROM SUORITUS WHERE RadanID = "+radan_id+" AND Heittojen_lkm = SELECT MIN(Heittojen_lkm) FROM SUORITUS WHERE RadanID = "+radan_id+";");
+			stmt.close();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return queryResults;
 	}
 
