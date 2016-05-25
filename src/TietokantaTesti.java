@@ -17,8 +17,12 @@ public class TietokantaTesti {
 			// Tulostetaan kaikki taulut
 			
 			Statement stmt = connection.createStatement();
+			
+			// Pelaaja -taulu
+			
 			ResultSet rs =stmt.executeQuery("SELECT * FROM Pelaaja;");
 			
+			System.out.println("Pelaaja");
 			System.out.println("pelaajan_id  | nimi       | puhnum     | kotipaikka" );
 			while (rs.next()){
 				
@@ -45,6 +49,50 @@ public class TietokantaTesti {
 				}
 				System.out.println("");
 			}
+			
+			// Rata -taulu
+			
+			rs = stmt.executeQuery("SELECT * FROM Rata;");
+			
+			System.out.println("\nRata");
+			System.out.println("radan_id     | nimi                    | luokitus   | vaylien_lkm | osoite     | ratamestari" );
+			while (rs.next()){
+				
+				int id = rs.getInt("radan_id");
+				String name = rs.getString("nimi");
+				String luokitus = rs.getString("luokitus");
+				int vaylienlkm = rs.getInt("vaylien_lkm");
+				String osoite = rs.getString("osoite");
+				String rm = rs.getString("ratamestari");
+				
+				System.out.print(id);
+				for (int i = 0; i < 15-Integer.toString(id).length();i++){
+					System.out.print(" ");
+				}
+				System.out.print(name);
+				for (int i = 0 ; i < 26-name.length(); i++){
+					System.out.print(" ");
+				}
+				System.out.print(luokitus);
+				for (int i = 0 ; i < 13-luokitus.length(); i++){
+					System.out.print(" ");
+				}
+				System.out.print(vaylienlkm);
+				for (int i = 0 ; i < 14-Integer.toString(vaylienlkm).length(); i++){
+					System.out.print(" ");
+				}
+				System.out.print(osoite);
+				for (int i = 0 ; i < 13-osoite.length(); i++){
+					System.out.print(" ");
+				}
+				System.out.print(rm);
+				for (int i = 0 ; i < 13-rm.length(); i++){
+					System.out.print(" ");
+				}
+				System.out.println("");
+				
+			}
+			
 		} catch (Exception e){
 			System.err.println( e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0); //This or something else?
