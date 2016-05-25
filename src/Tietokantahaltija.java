@@ -152,7 +152,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public void poistaPelaajaPelista(int pelaaja_id, int peli_id) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String SQL = "DELETE FROM Peli WHERE pelaaja_id="+pelaaja_id+" AND peli_id="+peli_id+");";
+		String SQL = "DELETE FROM Pelaamasta WHERE pelaaja_id="+pelaaja_id+" AND peli_id="+peli_id+");";
 		stmt.executeUpdate(SQL);
 		connection.commit();
 		stmt.close();
@@ -165,6 +165,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		String SQL = "INSERT INTO Suoritus(pelaajan_id, pelin_id, radan_id, vaylannumero, heittojen_lkm)"
 				+ "	VALUE(" + pelaajan_id + "," + pelin_id + "," + radan_id + "," + vaylannumero + "," + heittojen_lkm + ");";
 		stmt.executeUpdate(SQL);
+		connection.commit();
 		stmt.close();
 	}
 	
@@ -174,6 +175,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("DELETE FROM Suoritus WHERE pelaajan_id = " + pelaajan_id + " AND pelin_id=" + pelin_id 
 				+ " AND radan_id=" + radan_id + " AND vaylannumero=" + vaylannumero + ";");
+		connection.commit();
+		stmt.close();
 	}
 
 	@Override
