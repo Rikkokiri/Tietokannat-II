@@ -270,9 +270,17 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		return null;
 	}
 
-	@Override
+	@Override //TODO TESTAA!
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
-		// TODO Auto-generated method stub
+		
+		Statement stmt = connection.createStatement();
+		String query = "SELECT Pelaaja.nimi, Suoritus.heittojen_lkm "
+					+ "FROM Pelaaja, Suoritus "
+					+ "WHERE Suoritus.pelaajan_id = " + pelaajan_id
+						+ " AND Suoritus.radan_id = " + radan_id
+						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
+						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id";
+		
 		return null;
 	}
 }
