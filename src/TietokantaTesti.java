@@ -1,4 +1,3 @@
-import java.sql.DriverManager;
 import java.sql.*;
 
 public class TietokantaTesti {
@@ -55,7 +54,20 @@ public class TietokantaTesti {
 	
 	public void TulostaPelinTulos(int pelin_id){
 		
-		tkh.
+		try {
+			ResultSet lopputulos = tkh.pelinLopputulos(pelin_id);
+			
+			//TODO Tulosta myös pelin päivämäärä
+			System.out.println("Pelin " + pelin_id + " lopputulos");
+			
+			while( lopputulos.next() ){
+				String pelaajan_nimi = lopputulos.getString("nimi");
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("Jokin meni pieleen. Pelin lopputulosta ei pystytä tulostamaan.");
+			e.printStackTrace();
+		}
 		
 	}
 	
