@@ -38,20 +38,59 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean poistaPelaaja(int pelaajanID) {
-		// TODO Auto-generated method stub
-		return false;
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "DELETE FROM PELAAJA WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//T�st� johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, t�ten palautetaan true
+		return true;
 	}
 
 	@Override
 	public boolean vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) {
-		// TODO Auto-generated method stub
-		return false;
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "UPDATE PELAAJA SET PUHNUM = " + uusiPuhnum + " WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//T�st� johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, t�ten palautetaan true
+		return true;
 	}
 
 	@Override
-	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, int uusiKotipaikka) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) {
+		Statement stmt = null;
+		try{
+			stmt = connection.createStatement();
+			String sql = "UPDATE PELAAJA SET KOTIPAIKKA = " + uusiKotipaikka + " WHERE ID ="+ pelaajanID +";";
+			stmt.executeUpdate(sql);
+			stmt.close();
+			connection.commit();
+		}catch(Exception e) {
+			//Jokin meni pieleen metodissa.
+			//T�st� johtuen poistoa ei toteuteta
+			// -> palautetaan false
+			return false;
+		}
+		//Metodin suorittaminen onnistui, t�ten palautetaan true
+		return true;
 	}
 
 	@Override
@@ -67,7 +106,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException {
-		//TODO ID:n auto generointi. T�ll� hetkell� oittaa vaan random luvun
+		//TODO ID:n auto generointi. T�ll� hetkell� oittaa vaan random luvun
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + (int)(Math.random()*1000000000) + "," + radan_id + "," + paivamaara + ")");
@@ -129,26 +168,19 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		// TODO Auto-generated method stub
 		
 		Statement statement = null;
-		
-		try{
+		statement = connection.createStatement();
 			
-			statement = connection.createStatement();
+		String sqlQuery = "FROM Pelaaja, Suoritus"
+						+ "WHERE Suoritus.pelin_id =" + pelin_id
+								+ "AND Pelaaja.id = Suoritus.pelaajan_id"
+								+ "AND kokonaistulos = ( SUM(heittojen_lkm)"
+						+ "FROM Suoritus"
+						+ "GROUP BY pelaajan_id)"
+						+ "ORDER BY kokonaistulos;";
 			
-			String sqlQuery = "";
-			
-			ResultSet queryResults = statement.executeQuery(sqlQuery);
-			
-			//Print or return something?
-			
-			statement.close();
-			connection.commit();
-			
-		} catch (Exception e){
-			
-			//TODO Mitä tehdään, jos kysely ei jostain syystä onnistunut?
-			//Heitetäänkö poikkeus vai palautetaanko metodin käyttäjälle jokin arvo?
-			
-		}
+		ResultSet queryResults = statement.executeQuery(sqlQuery);
+		statement.close();
+		connection.commit();
 		
 	}
 
