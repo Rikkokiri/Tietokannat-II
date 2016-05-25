@@ -162,20 +162,18 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	//Työn alla! :) - Pilvi 
 
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException {
+		
 		Statement statement = null;
 		statement = connection.createStatement();
-		String sqlQuery = "SELECT Pelaaja.nimi, kokonaistulos"
-						+ "FROM Pelaaja, Suoritus"
-						+ "WHERE Suoritus.pelin_id =" + pelin_id 
-						+ "AND Pelaaja.id = Suoritus.pelaajan_id"
-						+ "AND kokonaistulos = ( SUM(heittojen_lkm)"
-						+ "FROM Suoritus"
-						+ "GROUP BY pelaajan_id)"
-						+ "ORDER BY kokonaistulos;";
-					
+		String sqlQuery = "SELECT Pelaaja.nimi, kokonaistulos.summa "
+						+ "FROM Pelaaja, ( SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+										+ "FROM Suoritus "
+										+ "WHERE Suoritus.pelin_id = " + pelin_id
+										+ " GROUP BY pelaajan_id) AS kokonaistulos "
+						+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id "
+						+ "ORDER BY kokonaistulos.summa;";
+
 		ResultSet queryResults = statement.executeQuery(sqlQuery);
-		//Print or return something?
-		statement.close();
 		connection.commit();
 		return queryResults;
 	}

@@ -176,11 +176,11 @@ public class TietokantaTesti {
 				System.out.println("");
 			}
 			
-			// Väylä -taulu
+			// Vï¿½ylï¿½ -taulu
 			
 			rs = stmt.executeQuery("SELECT * FROM Vayla");
 			
-			System.out.println("\nVäylä");
+			System.out.println("\nVï¿½ylï¿½");
 			System.out.println("radan_id    | par        | numero     | pituus" );
 			while (rs.next()){
 				
@@ -223,13 +223,13 @@ public class TietokantaTesti {
 		
 		try {
 			ResultSet lopputulos = tkh.pelinLopputulos(pelin_id);
-			
+
 			//TODO Tulosta myÃ¶s pelin pÃ¤ivÃ¤mÃ¤Ã¤rÃ¤
 			System.out.println("Pelin " + pelin_id + " lopputulos");
 			
 			while( lopputulos.next() ){
 				String pelaajan_nimi = lopputulos.getString("nimi");
-				int tulos = lopputulos.getInt("kokonaistulos");
+				int tulos = lopputulos.getInt("summa");
 				
 				//TODO Teen siistimpi tulostus
 				System.out.println(pelaajan_nimi + " | " + tulos);
