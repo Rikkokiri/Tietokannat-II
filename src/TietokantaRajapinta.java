@@ -16,13 +16,24 @@ public interface TietokantaRajapinta {
 	//------ Pelaaja ------------
 	/**
 	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
-	 * @param pelaajanID Pelaajan ID, suoritetaan erillisellä metodilla virhetilanteiden välttämiseksi
+	 * @param pelaajanID Pelaajan ID
 	 * @param pelaajanNimi String
 	 * @param puhnum String, maksimissaan 13 merkkiä
 	 * @param kotipaikka String, maksimissaan 30 merkkiä
 	 * @throws SQLException
 	 */
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
+	
+	
+	/**
+	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
+	 * METODIN TÄYTYY GENEROIDA SEURAAVA VAPAA ID
+	 * @param pelaajanNimi String
+	 * @param puhnum String, maksimissaan 13 merkkiä
+	 * @param kotipaikka String, maksimissaan 30 merkkiä
+	 * @throws SQLException
+	 */
+	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
 	
 	/**
 	 * Poistetaan parametrina annettu pelaaja edellyttäen ettei kyseistä pelaajaa ilmene muissa tauluissa
@@ -65,6 +76,17 @@ public interface TietokantaRajapinta {
 	 * @throws SQLException
 	 */
 	public void luoRata(int radan_id, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+	
+	/**
+	 * 
+	 * @param luokitus
+	 * @param vaylienLkm
+	 * @param osoite
+	 * @param ratamestari
+	 * @throws SQLException
+	 */
+	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+
 	
 	public void vaihdaRatamestari(String uusiRatamestari) throws SQLException;
 	
