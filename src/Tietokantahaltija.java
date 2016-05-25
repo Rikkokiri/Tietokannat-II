@@ -124,7 +124,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 <<<<<<< HEAD
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
-		//TODO ID:n auto generointi. Tällä hetkellä oittaa vaan random luvun
+		//TODO ID:n auto generointi. Tï¿½llï¿½ hetkellï¿½ oittaa vaan random luvun
 =======
 	public boolean luoPeli(int radan_id, String paivamaara) throws SQLException {
 		//TODO ID:n auto generointi. Tï¿½llï¿½ hetkellï¿½ oittaa vaan random luvun
