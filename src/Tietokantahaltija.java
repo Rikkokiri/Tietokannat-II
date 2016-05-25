@@ -157,6 +157,13 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public boolean korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
+			throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 	
 	
