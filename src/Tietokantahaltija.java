@@ -19,6 +19,43 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		System.out.println("Opened database successfully. Yasss.");
 	}
 	//-------------------------------------------
+	
+	/**
+	 * Generoi uuden int-tyyppisen arvon parametrina annetulle taulun uudelle arvolle
+	 * @param name
+	 * @return
+	 * @throws SQLException
+	 */
+	public int generoiID(String name) throws SQLException{
+		Statement stmt = null;
+		stmt = connection.createStatement();
+		String idSarake = "";
+		
+		switch (name) {
+		case "Pelaaja":
+			idSarake = "pelaajan_id";
+			break;
+
+		case "Rata":
+			idSarake = "radan_id";
+			break;
+			
+		case "Peli":
+			idSarake = "pelin_id";
+			break;
+			
+		default:
+			System.out.println("Nope nope nope");
+			break;
+		}
+		String sql = "SELECT "+idSarake+" FROM " +name+" WHERE ID=(SELECT max(ID) FROM ANIME);";
+		
+		ResultSet queryResults = stmt.executeQuery(sql);
+		//Print or return something?
+		stmt.close();
+		connection.commit();
+		return queryResults.getInt(idSarake);
+	}
 
 	@Override
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
