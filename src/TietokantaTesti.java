@@ -92,6 +92,9 @@ public class TietokantaTesti {
 				
 			}
 			
+			//Testataan pelin lopputulosek testaamista
+			TulostaPelinTulos(1);
+			
 		} catch (Exception e){
 			System.err.println( e.getClass().getName() + ": " + e.getMessage());
 			System.exit(0); //This or something else?
@@ -100,7 +103,7 @@ public class TietokantaTesti {
 	}
 	
 	
-	public void TulostaPelinTulos(int pelin_id){
+	public static void TulostaPelinTulos(int pelin_id){
 		
 		try {
 			ResultSet lopputulos = tkh.pelinLopputulos(pelin_id);
@@ -110,6 +113,10 @@ public class TietokantaTesti {
 			
 			while( lopputulos.next() ){
 				String pelaajan_nimi = lopputulos.getString("nimi");
+				int tulos = lopputulos.getInt("kokonaistulos");
+				
+				//TODO Teen siistimpi tulostus
+				System.out.println(pelaajan_nimi + " | " + tulos);
 			}
 			
 		} catch (SQLException e) {
