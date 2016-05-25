@@ -8,7 +8,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	
 	public Tietokantahaltija(){
 		try{
-			Class.forName("org.sqlite.JBC");
+			Class.forName("org.sqlite.JDBC");
 			connection = DriverManager.getConnection("jdbc:sqlite:frisbee.db");
 			connection.setAutoCommit(false);
 		} catch (Exception e){
@@ -165,6 +165,9 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		return false;
 	}
 	
+	public Connection getConnection(){
+		return connection;
+	}
 	
 	
 }
