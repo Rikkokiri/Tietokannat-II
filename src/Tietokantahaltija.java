@@ -158,12 +158,14 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt.close();
 	}
 
+	// Hoidan -Ville
 	@Override
 	public void luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
 			throws SQLException {
 		// TODO Auto-generated method stub
 	}
-
+	
+	//Hoidan -Ville
 	@Override
 	public void poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException {
 		// TODO Auto-generated method stub
