@@ -10,8 +10,8 @@ public interface TietokantaRajapinta {
 	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
 	 * @param pelaajanID Pelaajan ID
 	 * @param pelaajanNimi String
-	 * @param puhnum String, maksimissaan 13 merkkiä
-	 * @param kotipaikka String, maksimissaan 30 merkkiä
+	 * @param puhnum String, maksimissaan 13 merkkiï¿½
+	 * @param kotipaikka String, maksimissaan 30 merkkiï¿½
 	 * @throws SQLException Pelaajan luonti ei onnistunut
 	 */
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
@@ -19,26 +19,26 @@ public interface TietokantaRajapinta {
 	
 	/**
 	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen<br>
-	 * METODIN TÄYTYY GENEROIDA SEURAAVA <b>VAPAA</b> ID
+	 * METODIN Tï¿½YTYY GENEROIDA SEURAAVA <b>VAPAA</b> ID
 	 * @param pelaajanNimi String
-	 * @param puhnum String, maksimissaan 13 merkkiä
-	 * @param kotipaikka String, maksimissaan 30 merkkiä
+	 * @param puhnum String, maksimissaan 13 merkkiï¿½
+	 * @param kotipaikka String, maksimissaan 30 merkkiï¿½
 	 * @throws SQLException Pelaajan luonti ei onnistunut
 	 */
 	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
 	
 	/**
 	 * Poistetaan parametrina annettu pelaaja
-	 * <b>ALKUEHTO:</b> Pelaajasta ei saa olla ilmentymiä muissa tauluissa
+	 * <b>ALKUEHTO:</b> Pelaajasta ei saa olla ilmentymiï¿½ muissa tauluissa
 	 * @param pelaajanID int
-	 * @throws SQLException Pelaajan poisto ei onnistunut<br>Kysyttyä pelaajaa ei mahdollisesti löytynyt
+	 * @throws SQLException Pelaajan poisto ei onnistunut<br>Kysyttyï¿½ pelaajaa ei mahdollisesti lï¿½ytynyt
 	 */
 	public void poistaPelaaja(int pelaajanID) throws SQLException;
 	
 	/**
 	 * Vaihdetaan parametrina annetun pelaajan puhelinnumero parametrina annetuksi
 	 * @param pelaajanID int
-	 * @param uusiPuhnum String, maksimissaan 13 merkkiä
+	 * @param uusiPuhnum String, maksimissaan 13 merkkiï¿½
 	 * @throws SQLException Pelaajan puhelinnumeron vaihto ei onnistunut
 	 */
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, String uusiPuhnum) throws SQLException;
@@ -46,7 +46,7 @@ public interface TietokantaRajapinta {
 	/**
 	 * Vaihtaa parametrina annetun pelaajan kotipaikka parametrina annetuksi
 	 * @param pelaajanID int
-	 * @param uusiKotipaikka String, maksimissaan 30 merkkiä
+	 * @param uusiKotipaikka String, maksimissaan 30 merkkiï¿½
 	 * @throws SQLException Pelaajan kotipaikan vaihto ei onnistunut
 	 */
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException;
@@ -55,7 +55,7 @@ public interface TietokantaRajapinta {
 	
 	/**
 	 * Luo uuden Radan tietokantaan parametrina annettujen arvojen mukaan
-	 * HUOM: INT ID TÄYTYY GENEROIDA METODISSA!
+	 * HUOM: INT ID Tï¿½YTYY GENEROIDA METODISSA!
 	 * @param radan_id int
 	 * @param nimi
 	 * @param luokitus
@@ -92,7 +92,7 @@ public interface TietokantaRajapinta {
 	 * @param par int
 	 * @param numero int
 	 * @param pituus int
-	 * @throws SQLException Väylän luonti ei onnistunut
+	 * @throws SQLException Vï¿½ylï¿½n luonti ei onnistunut
 	 */
 	public void luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException;
 	
@@ -100,22 +100,22 @@ public interface TietokantaRajapinta {
 	/**
 	 * Luo tietokantaan parametreina annettujen arvojen mukaisen Pelin
 	 * @param radan_id int
-	 * @param paivamaara String, maksimissaan 10 merkkiä
+	 * @param paivamaara String, maksimissaan 10 merkkiï¿½
 	 * @throws SQLException Pelin luonti ei onnistunut
 	 */
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException;
 	
 	/**
-	 * Lisätään parametrina annettu pelaaja parametrina annettuun peliin<br>
-	 * <b>ALKUEHTO:</b> Pelin täytyy olla olemassa
+	 * Lisï¿½tï¿½ï¿½n parametrina annettu pelaaja parametrina annettuun peliin<br>
+	 * <b>ALKUEHTO:</b> Pelin tï¿½ytyy olla olemassa
 	 * @param pelin_id int
 	 * @param pelaajan_id int
-	 * @throws SQLException Pelaajan lisääminen peliin ei onnistunut<br>Pelaajaa tai Peliä ei ole olemassa
+	 * @throws SQLException Pelaajan lisï¿½ï¿½minen peliin ei onnistunut<br>Pelaajaa tai Peliï¿½ ei ole olemassa
 	 */
 	public void pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException;
 	
 	/**
-	 * Poistaa pelaajan pelistä
+	 * Poistaa pelaajan pelistï¿½
 <<<<<<< HEAD
 	 * @param pelaajan_id
 	 * @param peli_id
@@ -123,7 +123,7 @@ public interface TietokantaRajapinta {
 =======
 	 * @param pelaaja_id int
 	 * @param peli_id int
-	 * @throws SQLException Pelaajan poistaminen pelistä ei onnistunut
+	 * @throws SQLException Pelaajan poistaminen pelistï¿½ ei onnistunut
 >>>>>>> 9248007e6d75609def016799eddafa90308f6042
 	 */
 	public void poistaPelaajaPelista(int pelaajan_id, int peli_id) throws SQLException;
@@ -151,13 +151,13 @@ public interface TietokantaRajapinta {
 	public void poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException;
 	
 	/**
-	 * Vaihtaa parametreja vastaavan pelin heittojen lukumäärän
+	 * Vaihtaa parametreja vastaavan pelin heittojen lukumï¿½ï¿½rï¿½n
 	 * @param pelaajan_id int
 	 * @param pelin_id int
 	 * @param radan_id int
 	 * @param vaylannumero int
 	 * @param heittojen_lkm int
-	 * @throws SQLException Heittojenlukumäärän vaihtaminen ei onnistunut
+	 * @throws SQLException Heittojenlukumï¿½ï¿½rï¿½n vaihtaminen ei onnistunut
 	 */
 	public void korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm) throws SQLException;
 	
@@ -167,9 +167,9 @@ public interface TietokantaRajapinta {
 	
 	//>> YksittÃ¤isen pelin lopputulos (listaus yksittÃ¤isten pelaajien kokonaistuloksista tietyssÃ¤ pelissÃ¤) ja pelin voittaja
 	/**
-	 * Palauttaa parametrina annettua arvoa vastaavan pelin tiedot ResultSettinä
+	 * Palauttaa parametrina annettua arvoa vastaavan pelin tiedot ResultSettinï¿½
 	 * @param pelin_id int
-	 * @return ResultSet, sisältää kysytyn pelin lopputuloksen
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn pelin lopputuloksen
 	 * @throws SQLException
 	 */
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException;
@@ -177,25 +177,25 @@ public interface TietokantaRajapinta {
 	//>> YksittÃ¤isen pelin voittajan nimi ja tulos (= heittojen yhteismÃ¤Ã¤rÃ¤)
 	/** Palauttaa parametrina annettua arvoa vastaavan pelin voittaja
 	 * @param pelin_id int
-	 * @return ResultSet, sisältää kysytyn pelin voittajann
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn pelin voittajann
 	 * @throws SQLException
 	 */
 	public ResultSet pelinVoittaja(int pelin_id) throws SQLException;
 	
 	//>> Jonkin radan ennÃ¤tyssuoritus
 	/**
-	 * Palauttaa parametrina annettua arvoa vastaavan radan ennnätyksen ResultSettinä
+	 * Palauttaa parametrina annettua arvoa vastaavan radan ennnï¿½tyksen ResultSettinï¿½
 	 * @param radan_id int
-	 * @return ResultSet, sisältää kysytyn radan ennätyksen
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn radan ennï¿½tyksen
 	 * @throws SQLException
 	 */
 	public ResultSet radanEnnatys(int radan_id) throws SQLException;
 	
 	//>> YksittÃ¤isen pelaajan keskiarvotulos jollakin tietyllÃ¤ vÃ¤ylÃ¤llÃ¤ (tieto ei tietenkÃ¤Ã¤n ole jÃ¤rin mielenkiintoinen, jos pelaajalla on vain muutama tulos vÃ¤ylÃ¤ltÃ¤)
 	/**
-	 * Palauttaa parametrina annettua arvoa vastaavan pelaajan tiedot ResultSettinä
+	 * Palauttaa parametrina annettua arvoa vastaavan pelaajan tiedot ResultSettinï¿½
 	 * @param pelaaja_id int
-	 * @return ResultSet, sisältää kysytyn pelaajan tiedot
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn pelaajan tiedot
 	 * @throws SQLException
 	 */
 	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException;
@@ -203,34 +203,52 @@ public interface TietokantaRajapinta {
 	/**
 	 * Palauttaa parametrina annettua vastaavan radan tiedot
 	 * @param radan_id int
-	 * @return ResultSet, sisältää kysytyn radan tiedot
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn radan tiedot
 	 * @throws SQLException
 	 */
 	public ResultSet radanTiedot(int radan_id) throws SQLException;
 
 	/**
-	 * Palauttaa parametria annetun väylän tiedot
+	 * Palauttaa parametria annetun vï¿½ylï¿½n tiedot
 	 * @param radan_id int
 	 * @param vaylan_numero int
-	 * @return ResultSet, sisältää kysytyn väylän tiedot
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn vï¿½ylï¿½n tiedot
 	 * @throws SQLException
 	 */
 	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException;
 	
 	/**
-	 * Palauttaa parametrina annetun pelaajan suoritukset pyydetyltä väylältä
+	 * Palauttaa parametrina annetun pelaajan suoritukset pyydetyltï¿½ vï¿½ylï¿½ltï¿½
 	 * @param pelaajan_id int
 	 * @param radan_id int
 	 * @param vaylan_numero int
-	 * @return ResultSet, sisältää kysytyn pelaajan suoritukset kysytyllä väylällä
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ kysytyn pelaajan suoritukset kysytyllï¿½ vï¿½ylï¿½llï¿½
 	 * @throws SQLException
 	 */
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException;
 	
 	/**
+	 * Palauttaa pelaajan henkilÃ¶kohtaisen ennÃ¤tyksen pyydetyllÃ¤ radalla.
+	 * @param pelaajan_id int 
+	 * @param radan_id int
+	 * @return ResultSet, sisÃ¤ltÃ¤Ã¤ kysytyn pelaaan nimen, kokonaistuloksen ja suorituksen pÃ¤ivÃ¤mÃ¤Ã¤rÃ¤n
+	 * @throws SQLException
+	 */
+	public ResultSet pelaajanEnnatysRadalla(int pelaajan_id, int radan_id) throws SQLException;
+	
+	/**
+	 * Palauttaa pelaajan kaikkien aikaan parhaan tuloksen (vÃ¤hiten heittoja) ja radan, jolla tulos on tehty.
+	 * @param pelaajan_id
+	 * @param radan_id
+	 * @return
+	 * @throws SQLException
+	 */
+	public ResultSet pelaajanEnnatys(int pelaajan_id, int radan_id) throws SQLException;
+	
+	/**
 	 * Palauttaa parametrina annetun pelin pelaajien tiedot
 	 * @param pelin_id
-	 * @return ResultSet, sisältää pelin pelaajien nimen, puhelinnumeron ja kotipaikan
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ pelin pelaajien nimen, puhelinnumeron ja kotipaikan
 	 * @throws SQLException
 	 */
 	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException;

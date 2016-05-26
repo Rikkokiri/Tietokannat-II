@@ -24,7 +24,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	
 	/**
 	 * Generoi uuden int-tyyppisen arvon parametrina annetulle taulun uudelle arvolle<br>
-	 * Käytettävät String-tyyppiset arvot ovat:
+	 * Kï¿½ytettï¿½vï¿½t String-tyyppiset arvot ovat:
 	 * <ul><li>Pelaaja</li>
 	 * <li>Rata</li>
 	 * <li>Peli</li></ul>
@@ -327,6 +327,22 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 				+ "WHERE pelin_id = " + pelin_id + ";";
 		ResultSet rs = stmt.executeQuery(sql);
 		return rs;
+	}
+
+	@Override
+	public ResultSet pelaajanEnnatysRadalla(int pelaajan_id, int radan_id) throws SQLException {
+		
+		Statement stmt = connection.createStatement();
+		String query = "";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
+	}
+
+	@Override
+	public ResultSet pelaajanEnnatys(int pelaajan_id, int radan_id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
