@@ -18,8 +18,8 @@ public interface TietokantaRajapinta {
 	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
 	 * @param pelaajanID Pelaajan ID
 	 * @param pelaajanNimi String
-	 * @param puhnum String, maksimissaan 13 merkki‰
-	 * @param kotipaikka String, maksimissaan 30 merkki‰
+	 * @param puhnum String, maksimissaan 13 merkkiÔøΩ
+	 * @param kotipaikka String, maksimissaan 30 merkkiÔøΩ
 	 * @throws SQLException
 	 */
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
@@ -27,16 +27,16 @@ public interface TietokantaRajapinta {
 	
 	/**
 	 * Luo tietokantaan uuden pelaajan parametrina annettujen arvojen mukaisesti Pelaaja-tableen
-	 * METODIN TƒYTYY GENEROIDA SEURAAVA VAPAA ID
+	 * METODIN TÔøΩYTYY GENEROIDA SEURAAVA VAPAA ID
 	 * @param pelaajanNimi String
-	 * @param puhnum String, maksimissaan 13 merkki‰
-	 * @param kotipaikka String, maksimissaan 30 merkki‰
+	 * @param puhnum String, maksimissaan 13 merkkiÔøΩ
+	 * @param kotipaikka String, maksimissaan 30 merkkiÔøΩ
 	 * @throws SQLException
 	 */
 	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException;
 	
 	/**
-	 * Poistetaan parametrina annettu pelaaja edellytt‰en ettei kyseist‰ pelaajaa ilmene muissa tauluissa
+	 * Poistetaan parametrina annettu pelaaja edellyttÔøΩen ettei kyseistÔøΩ pelaajaa ilmene muissa tauluissa
 	 * @param pelaajanID
 	 * @throws SQLException
 	 */
@@ -45,7 +45,7 @@ public interface TietokantaRajapinta {
 	/**
 	 * Vaihdetaan parametrina annetun pelaajan puhelinnumero parametrina annetuksi
 	 * @param pelaajanID
-	 * @param uusiPuhnum String, maksimissaan 13 merkki‰
+	 * @param uusiPuhnum String, maksimissaan 13 merkkiÔøΩ
 	 * @throws SQLException
 	 */
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException;
@@ -53,7 +53,7 @@ public interface TietokantaRajapinta {
 	/**
 	 * Vaihtaa parametrina annetun pelaajan kotipaikka parametrina annetuksi
 	 * @param pelaajanID
-	 * @param uusiKotipaikka String, maksimissaan 30 merkki‰
+	 * @param uusiKotipaikka String, maksimissaan 30 merkkiÔøΩ
 	 * @throws SQLException
 	 */
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException;
@@ -79,7 +79,7 @@ public interface TietokantaRajapinta {
 	
 	/**
 	 * Luo uuden Radan tietokantaan parametrina annettujen arvojen mukaan
-	 * HUOM: INT ID TƒYTYY GENEROIDA METODISSA!
+	 * HUOM: INT ID TÔøΩYTYY GENEROIDA METODISSA!
 	 * @param luokitus
 	 * @param vaylienLkm
 	 * @param osoite
@@ -117,8 +117,8 @@ public interface TietokantaRajapinta {
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException;
 	
 	/**
-	 * Lis‰t‰‰n parametrina annettu pelaaja parametrina annettuun peliin
-	 * ALKUEHTO: Pelin t‰ytyy olla olemassa
+	 * LisÔøΩtÔøΩÔøΩn parametrina annettu pelaaja parametrina annettuun peliin
+	 * ALKUEHTO: Pelin tÔøΩytyy olla olemassa
 	 * @param pelin_id
 	 * @param pelaajan_id
 	 * @throws SQLException
@@ -126,7 +126,7 @@ public interface TietokantaRajapinta {
 	public void pelaajaPeliin(int pelin_id, int pelaajan_id) throws SQLException;
 	
 	/**
-	 * Poistaa pelaajan pelist‰
+	 * Poistaa pelaajan pelistÔøΩ
 	 * @param pelaaja_id
 	 * @param peli_id
 	 * @throws SQLException
@@ -158,9 +158,9 @@ public interface TietokantaRajapinta {
 	
 	//Suorituksen muuttamisen/korjaamisen mahdollistavia metodeita?
 	//Tarpeettomia?
-	// - Hyvinkin tarpeellisia, aika monta kertaa merkannut vahingossa v‰‰rin -Ville
+	// - Hyvinkin tarpeellisia, aika monta kertaa merkannut vahingossa vÔøΩÔøΩrin -Ville
 	/**
-	 * Vaihtaa parametreja vastaavan pelin heittojen lukum‰‰r‰n
+	 * Vaihtaa parametreja vastaavan pelin heittojen lukumÔøΩÔøΩrÔøΩn
 	 * @param pelaajan_id
 	 * @param pelin_id
 	 * @param radan_id
@@ -178,16 +178,24 @@ public interface TietokantaRajapinta {
 	
 	//>> Yksitt√§isen pelin lopputulos (listaus yksitt√§isten pelaajien kokonaistuloksista tietyss√§ peliss√§) ja pelin voittaja
 	/**
-	 * Palauttaa parametrina annettua arvoa vastaavan pelin tiedot ResultSettin‰
+	 * Palauttaa parametrina annettua arvoa vastaavan pelin tiedot ResultSettinÔøΩ
 	 * @param pelin_id
 	 * @return
 	 * @throws SQLException
 	 */
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException;
 	
+	//>> Yksitt√§isen pelin voittajan nimi ja tulos (= heittojen yhteism√§√§r√§)
+	/**
+	 * @param pelin_id
+	 * @return
+	 * @throws SQLException
+	 */
+	public ResultSet pelinVoittaja(int pelin_id) throws SQLException;
+	
 	//>> Jonkin radan enn√§tyssuoritus
 	/**
-	 * Palauttaa parametrina annettua arvoa vastaavan radan ennn‰tyksen ResultSettin‰
+	 * Palauttaa parametrina annettua arvoa vastaavan radan ennnÔøΩtyksen ResultSettinÔøΩ
 	 * @param radan_id
 	 * @return
 	 * @throws SQLException
@@ -196,7 +204,7 @@ public interface TietokantaRajapinta {
 	
 	//>> Yksitt√§isen pelaajan keskiarvotulos jollakin tietyll√§ v√§yl√§ll√§ (tieto ei tietenk√§√§n ole j√§rin mielenkiintoinen, jos pelaajalla on vain muutama tulos v√§yl√§lt√§)
 	/**
-	 * Palauttaa parametrina annettua arvoa vastaavan pelaajan tiedot ResultSettin‰
+	 * Palauttaa parametrina annettua arvoa vastaavan pelaajan tiedot ResultSettinÔøΩ
 	 * @param pelaaja_id
 	 * @return
 	 * @throws SQLException

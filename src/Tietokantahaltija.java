@@ -270,7 +270,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		return null;
 	}
 
-	@Override //TODO TESTAA!
+	@Override
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
 		
 		Statement stmt = connection.createStatement();
@@ -281,6 +281,12 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
 						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id";
 		
+		return null;
+	}
+
+	@Override
+	public ResultSet pelinVoittaja(int pelin_id) throws SQLException {
+		// TODO Auto-generated method stub
 		return null;
 	}
 }
