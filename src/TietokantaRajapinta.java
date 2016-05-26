@@ -84,6 +84,7 @@ public interface TietokantaRajapinta {
 	 * @param osoite
 	 * @param ratamestari
 	 * @throws SQLException
+	 */
 	public void luoRata(String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
 
 	/**

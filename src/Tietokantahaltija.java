@@ -64,7 +64,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "INSERT INTO Pelaaja VALUES (" + pelaajanID + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
+		String sql = "INSERT INTO Pelaaja VALUES (" + pelaajanID + ", '" + pelaajanNimi + "', '" + puhnum + "', '" + kotipaikka + "');";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -89,7 +89,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "UPDATE Pelaaja SET puhnum = " + uusiPuhnum + " WHERE pelaajan_id ="+ pelaajanID +";";
+		String sql = "UPDATE Pelaaja SET puhnum ='" + uusiPuhnum + "' WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -99,7 +99,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void vaihdaPelaajanKotipaikka(int pelaajanID, String uusiKotipaikka) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "UPDATE Pelaaja SET kotipaikka = " + uusiKotipaikka + " WHERE pelaajan_id ="+ pelaajanID +";";
+		String sql = "UPDATE Pelaaja SET kotipaikka ='" + uusiKotipaikka + "' WHERE pelaajan_id ="+ pelaajanID +";";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -119,7 +119,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
-				"VALUES(" + generoiID("Peli") + "," + radan_id + "," + paivamaara + ")");
+				"VALUES(" + generoiID("Peli") + "," + radan_id + ",'" + paivamaara + "')");
 		connection.commit();
 		stmt.close();
 	}
@@ -127,7 +127,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public void vaihdaRatamestari(int radan_id, String uusiRatamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String SQL = "UPDATE Rata SET ratamestari="+uusiRatamestari+" WHERE radan_id="+radan_id+";";
+		String SQL = "UPDATE Rata SET ratamestari='"+uusiRatamestari+"' WHERE radan_id="+radan_id+";";
 		stmt.executeUpdate(SQL);
 		connection.commit();
 		stmt.close();
@@ -240,7 +240,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", " + pelaajanNimi + ", " + puhnum + ", " + kotipaikka + ");";
+		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", '" + pelaajanNimi + "', '" + puhnum + "', '" + kotipaikka + "');";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -249,7 +249,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void luoRata(String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Rata(radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)" +
-				"VALUES (" + generoiID("Rata") + ",'" + nimi + "','" + luokitus + "'," + vaylienLkm + ",'" + osoite + "','" + ratamestari +
+				"VALUES (" + generoiID("Rata") + ",'" + nimi + "','" + luokitus + "'," + vaylienLkm + ",'"
+				+ osoite + "','" + ratamestari +
 				"');");
 		connection.commit();
 		
