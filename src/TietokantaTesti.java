@@ -47,7 +47,6 @@ public class TietokantaTesti {
 			
 			tulostaTaulut();
 			
-
 			
 			//Testataan pelin lopputulosek testaamista
 			TulostaPelinTulos(1);
@@ -280,6 +279,25 @@ public class TietokantaTesti {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	/**
+	 * 
+	 * @param rs
+	 */
+	public static void tulostaResultSet(ResultSet rs){
+		try {
+			ResultSetMetaData rsmd = rs.getMetaData();
+			while(rs.next()){
+				String tmp = "";
+				for(int i = 1; i < rsmd.getColumnCount(); i++){
+					tmp += rs.getString(i) +"\t";
+				}
+				System.out.println(tmp);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 
