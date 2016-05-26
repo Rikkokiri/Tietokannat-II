@@ -301,4 +301,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
 	}
+	
+	@Override
+	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

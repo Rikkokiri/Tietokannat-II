@@ -219,4 +219,11 @@ public interface TietokantaRajapinta {
 	 */
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException;
 	
+	/**
+	 * Palauttaa parametrina annetun pelin pelaajien tiedot
+	 * @param pelin_id
+	 * @return ResultSet, sis‰lt‰‰ pelin pelaajien nimen, puhelinnumeron ja kotipaikan
+	 * @throws SQLException
+	 */
+	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException;
 }
