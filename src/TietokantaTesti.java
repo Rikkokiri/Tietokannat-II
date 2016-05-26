@@ -27,7 +27,23 @@ public class TietokantaTesti {
 //			tkh.vaihdaPelaajanPuhelinnumero(141293, "0501337912"); // -Toimii
 //			tkh.vaihdaPelaajanKotipaikka(141293, "Turku"); // -Toimii
 			
-//			tkh.luoPeli(12760, "25.5.2016"); // -Toimii
+//			tkh.luoPeli(23, "25.05.2016"); // -Toimii
+			
+//			tkh.vaihdaRatamestari(12760, "Pelle Hermanni"); // -Toimii
+			
+//			for (int i = 1; i < 23; i++){
+//				tkh.luoVayla(23, 3, i, (int)(30 + Math.random()*120.0)); //Toimii
+//			}
+			
+//			tkh.pelaajaPeliin(3, 141293); //-Toimii
+//			tkh.pelaajaPeliin(3, 12071994);
+//			tkh.poistaPelaajaPelista(12071994, 3); // -Toimii
+			
+//			for ( int i = 1; i < 23; i++){
+//				tkh.luoSuoritus(141293, 3, 23, i, 1+(int)(Math.random()*4)); // -Toimii
+//			}
+//			tkh.poistaSuoritus(141293, 3, 23, 22); //-Toimii
+			tkh.luoSuoritus(141293, 3, 23, 22, 3);
 			
 			tulostaTaulut();
 			
