@@ -105,7 +105,7 @@ public class TietokantaTesti {
 		System.out.println("\nRata");
 		System.out.println("radan_id     | nimi                    | luokitus   | vaylien_lkm | osoite     | ratamestari" );
 		while (rs.next()){
-			
+
 			int id = rs.getInt("radan_id");
 			String name = rs.getString("nimi");
 			String luokitus = rs.getString("luokitus");
@@ -284,23 +284,37 @@ public class TietokantaTesti {
 	}
 	
 	/**
-	 * 
+	 * Tulostaa parametrina annetun resultsetin tiedot
 	 * @param rs
 	 */
 	public static void tulostaResultSet(ResultSet rs){
 		try {
 			ResultSetMetaData rsmd = rs.getMetaData();
-			while(rs.next()){
-				String tmp = "";
-				for(int i = 1; i < rsmd.getColumnCount(); i++){
-					tmp += rs.getString(i) +"\t";
+			if(rsmd.getColumnCount()==1){
+				System.out.println(rsmd.getColumnName(1)+"\n"+rs.getString(1));
+			}else{
+				String names = "";
+				for(int i = 1; i < rsmd.getColumnCount();i++){
+					if(i == rsmd.getColumnCount()){
+						names+=" " + rsmd.getColumnName(i);
+					}else{
+						names+=" " + rsmd.getColumnName(i) + "\t |";
+					}
 				}
-				System.out.println(tmp);
+				while(rs.next()){
+					String tmp = "";
+					for(int i = 1; i < rsmd.getColumnCount(); i++){
+						tmp += rs.getString(i) +"\t";
+					}
+					System.out.println(tmp);
+				}
 			}
+			rs.getStatement().close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 
 }
