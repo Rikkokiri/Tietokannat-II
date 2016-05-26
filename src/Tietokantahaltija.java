@@ -333,7 +333,15 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet pelaajanEnnatysRadalla(int pelaajan_id, int radan_id) throws SQLException {
 		
 		Statement stmt = connection.createStatement();
-		String query = "";
+		String query = "SELECT Pelaaja.nimi, MIN(kokonaistulos.summa), Peli.paivamaara "
+					+ "FROM Pelaaja, Peli, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+											+ "FROM Suoritus "
+											+ "WHERE Suoritus.pelaajan_id = "+ pelaajan_id + " AND Suoritus.pelin_id IN "
+													+ "(SELECT pelin_id "
+													+ "FROM Peli "
+													+ "WHERE radan_id = " + radan_id + ")"
+											+ "GROUP BY pelin_id) kokonaistulos "
+					+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id AND kokonaistulos.pelin_id = Peli.pelin_id;";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
