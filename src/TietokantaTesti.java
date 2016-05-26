@@ -45,7 +45,9 @@ public class TietokantaTesti {
 //			tkh.poistaSuoritus(141293, 3, 23, 22); //-Toimii
 //			tkh.luoSuoritus(141293, 3, 23, 22, 3);
 			
-			tulostaTaulut();
+//			tkh.korjaaHeittojenLkm(141293, 3, 23, 22, 4); // -Toimii
+			
+//			tulostaTaulut();
 			
 
 			
@@ -229,7 +231,7 @@ public class TietokantaTesti {
 		
 		rs = stmt.executeQuery("SELECT * FROM Vayla");
 		
-		System.out.println("\nVï¿½ylï¿½");
+		System.out.println("\nVäylä");
 		System.out.println("radan_id    | par        | numero     | pituus" );
 		while (rs.next()){
 			
@@ -258,7 +260,7 @@ public class TietokantaTesti {
 		}
 
 	}
-	
+		
 	public static void TulostaPelinTulos(int pelin_id){
 		
 		try {
