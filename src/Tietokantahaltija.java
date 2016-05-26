@@ -291,7 +291,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet pelinVoittaja(int pelin_id) throws SQLException {
 		
 		Statement stmt = connection.createStatement();
-		String query = "SELECT Pelaaja.nimi, MAX(kokonaistulos.summa) "
+		String query = "SELECT Pelaaja.nimi, MIN(kokonaistulos.summa) "
 				+ "FROM Pelaaja, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
 				+ "FROM Suoritus "
 				+ "WHERE Suoritus.pelin_id = " + pelin_id
