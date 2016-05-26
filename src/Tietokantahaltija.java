@@ -210,8 +210,21 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public ResultSet radanEnnatys(int radan_id) throws SQLException {
 		Statement stmt = connection.createStatement();
-		ResultSet queryResults = stmt.executeQuery("SELECT * FROM Suoritus WHERE radan_id = "+radan_id+" AND heittojen_lkm = SELECT MIN(heittojen_lkm) FROM SUORITUS WHERE radan_id = "+radan_id+";");
-		return queryResults;
+		
+		//ResultSet queryResults = stmt.executeQuery("SELECT * FROM Suoritus WHERE radan_id = "+radan_id+" AND heittojen_lkm = SELECT MIN(heittojen_lkm) FROM SUORITUS WHERE radan_id = "+radan_id+";");
+		
+		String query = "SELECT Pelaaja.nimi, MIN(kokonaistulos.summa), Peli.paivamaara "
+					+ "FROM Pelaaja, Peli, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+										+ "FROM Suoritus "
+										+ "WHERE Suoritus.pelin_id IN " 
+														+ "(SELECT pelin_id "
+														+ "FROM Peli "
+														+ "WHERE radan_id = " + radan_id + ") "
+										+ "GROUP BY pelaajan_id, pelin_id) kokonaistulos "
+					+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id AND kokonaistulos.pelin_id = Peli.pelin_id;";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
 	}
 
 	@Override

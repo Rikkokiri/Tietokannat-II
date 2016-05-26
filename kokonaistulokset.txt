@@ -141,7 +141,7 @@ FROM Pelaaja, Peli, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa
 			(SELECT pelin_id
 			FROM Peli
 			WHERE radan_id = 12760)
-		GROUP BY pelaajan_id) kokonaistulos
+		GROUP BY pelaajan_id, pelin_id) kokonaistulos
 WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id
 	AND kokonaistulos.pelin_id = Peli.pelin_id
 
