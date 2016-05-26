@@ -166,6 +166,14 @@ public interface TietokantaRajapinta {
 	 */
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException;
 	
+	//>> YksittÃ¤isen pelin voittajan nimi ja tulos (= heittojen yhteismÃ¤Ã¤rÃ¤)
+	/** Palauttaa parametrina annettua arvoa vastaavan pelin voittaja
+	 * @param pelin_id int
+	 * @return ResultSet, sisältää kysytyn pelin voittajann
+	 * @throws SQLException
+	 */
+	public ResultSet pelinVoittaja(int pelin_id) throws SQLException;
+	
 	//>> Jonkin radan ennÃ¤tyssuoritus
 	/**
 	 * Palauttaa parametrina annettua arvoa vastaavan radan ennnätyksen ResultSettinä
