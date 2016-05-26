@@ -82,6 +82,33 @@ WHERE Suoritus.pelaajan_id = “pelaajan_id”
 
 
 
+//--------------
+
+SELECT Pelaaja.nimi, kokonaistulos.summa
+FROM Pelaaja, ( SELECT pelin_id, pelaajan_id SUM(heittojen_lkm) AS summa"
+		FROM Suoritus
+		WHERE Suoritus.pelin_id = “+ pelin_id
+		GROUP BY pelaajan_id) kokonaistulos
+WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id
+ORDER BY kokonaistulos.summa;
 
 
 - TO DO: Radan ennätys!
+
+
+PELIN VOITTAJA
+
+
+SELECT Pelaaja.nimi, MAX(kokonaistulos.summa)
+FROM Pelaaja, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa
+		FROM Suoritus
+		WHERE Suoritus.pelin_id = 1
+		GROUP pelaajan_id) kokonaistulos
+WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id
+
+
+
+
+
+
+

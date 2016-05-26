@@ -283,12 +283,22 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
 						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id";
 		
-		return null;
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
 	}
 
 	@Override
 	public ResultSet pelinVoittaja(int pelin_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Statement stmt = connection.createStatement();
+		String query = "SELECT Pelaaja.nimi, MAX(kokonaistulos.summa) "
+				+ "FROM Pelaaja, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+				+ "FROM Suoritus "
+				+ "WHERE Suoritus.pelin_id = " + pelin_id
+				+ " GROUP BY pelaajan_id) kokonaistulos "
+				+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id;";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
 	}
 }
