@@ -298,7 +298,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 					+ "WHERE Suoritus.pelaajan_id = " + pelaajan_id
 						+ " AND Suoritus.radan_id = " + radan_id
 						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
-						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id";
+						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id"
+						+ " AND Peli.pelin_id = Suoritukset.pelin_id";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
