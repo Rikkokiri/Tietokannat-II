@@ -76,7 +76,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		Statement stmt = null;
 		stmt = connection.createStatement();
 		String sql = "DELETE FROM Pelaaja " +
-				"WHERE pelaaja_id=" + pelaajanID +
+				"WHERE pelaajan_id=" + pelaajanID +
 				" AND NOT EXISTS( SELECT * FROM Pelaamassa, Suoritus "+
 				"WHERE Pelaamassa.pelaajan_id=" + pelaajanID +
 				" AND Suoritus.pelaajan_id=" + pelaajanID + ");";
@@ -86,7 +86,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException {
+	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, String uusiPuhnum) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
 		String sql = "UPDATE Pelaaja SET puhnum ='" + uusiPuhnum + "' WHERE pelaajan_id ="+ pelaajanID +";";
@@ -109,8 +109,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void luoRata(int radanID, String nimi, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Rata(radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)" +
-				"VALUES (" + radanID + "," + nimi + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
-				");");
+				"VALUES (" + radanID + ",'" + nimi + "','" + radanLuokitus + "'," + vaylienLkm + ",'" + osoite + "','" + ratamestari +
+				"');");
 		connection.commit();
 		stmt.close();
 	}
