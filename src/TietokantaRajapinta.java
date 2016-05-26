@@ -41,7 +41,7 @@ public interface TietokantaRajapinta {
 	 * @param uusiPuhnum String, maksimissaan 13 merkkiä
 	 * @throws SQLException Pelaajan puhelinnumeron vaihto ei onnistunut
 	 */
-	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, int uusiPuhnum) throws SQLException;
+	public void vaihdaPelaajanPuhelinnumero(int pelaajanID, String uusiPuhnum) throws SQLException;
 	
 	/**
 	 * Vaihtaa parametrina annetun pelaajan kotipaikka parametrina annetuksi
@@ -54,7 +54,6 @@ public interface TietokantaRajapinta {
 	//------ Rata ------------
 	
 	/**
-<<<<<<< HEAD
 	 * Luo uuden Radan tietokantaan parametrina annettujen arvojen mukaan
 	 * HUOM: INT ID TÄYTYY GENEROIDA METODISSA!
 	 * @param radan_id int
@@ -64,15 +63,6 @@ public interface TietokantaRajapinta {
 	 * @param osoite
 	 * @param ratamestari
 	 * @throws SQLException
-=======
-	 * Luodaan annettujen parametrien mukainen rata
-	 * @param radan_id int
-	 * @param luokitus String, maksimissaan 4 merkkiä
-	 * @param vaylienLkm int
-	 * @param osoite String, maksimissaan 40 merkkiä
-	 * @param ratamestari String
-	 * @throws SQLException Radan luonti ei onnistunut
->>>>>>> 9248007e6d75609def016799eddafa90308f6042
 	 */
 	public void luoRata(int radan_id, String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
 	

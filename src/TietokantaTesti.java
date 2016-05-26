@@ -14,15 +14,23 @@ public class TietokantaTesti {
 			
 			// ----- Metodien testaus ------ //
 			
-			//System.out.println(tkh.generoiID("Pelaaja")); // -Toimii
-			//System.out.println(tkh.generoiID("Rata")); // -Toimii
-			//System.out.println(tkh.generoiID("Peli")); // Toimii
+//			System.out.println(tkh.generoiID("Pelaaja")); // -Toimii
+//			System.out.println(tkh.generoiID("Rata")); // -Toimii
+//			System.out.println(tkh.generoiID("Peli")); // Toimii
 //			
-//			tkh.luoPelaaja("Kalle", "34733101", "Tampere");
-//			tulostaTaulut();
+//			tkh.luoPelaaja("Kalle", "34733101", "Tampere"); // -Toimii
+//			tkh.poistaPelaaja(12071996); // -Toimii
 			
-			tkh.luoRata("Lideon frisbeegolfrata","A1", 18, "Lieto", "Niilo");
+//			tkh.luoRata("Lideon frisbeegolfrata","A1", 18, "Lieto", "Niilo"); // -Toimii
+//			tkh.luoRata(23, "Lauste", "AA1" , 21, "Lauste", "Hannu"); // -Toimii
+			
+//			tkh.vaihdaPelaajanPuhelinnumero(141293, "0501337912"); // -Toimii
+//			tkh.vaihdaPelaajanKotipaikka(141293, "Turku"); // -Toimii
+			
+//			tkh.luoPeli(12760, "25.5.2016"); // -Toimii
+			
 			tulostaTaulut();
+			
 
 			
 			//Testataan pelin lopputulosek testaamista
