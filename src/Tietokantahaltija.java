@@ -344,5 +344,13 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	@Override
+	public ResultSet radanPar(int radan_id) throws SQLException{
+		Statement stmt = connection.createStatement();
+		String SQL = "SELECT SUM(Par) FROM Vayla WHERE radan_id="+radan_id+";";
+		ResultSet rs = stmt.executeQuery(SQL);
+		
+		return rs;
+	}
+	
 }

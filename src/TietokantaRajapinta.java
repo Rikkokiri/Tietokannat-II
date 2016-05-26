@@ -252,4 +252,12 @@ public interface TietokantaRajapinta {
 	 * @throws SQLException
 	 */
 	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException;
+	
+	/**
+	 * Palauttaa parametrina kysytyn radan v‰ylien yhteisen par
+	 * @param radan_id int
+	 * @return ResultSet, sis‰lt‰‰ Radan Par
+	 * @throws SQLException
+	 */
+	public ResultSet radanPar(int radan_id) throws SQLException;
 }
