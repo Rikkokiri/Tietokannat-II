@@ -43,7 +43,7 @@ public class TietokantaTesti {
 //				tkh.luoSuoritus(141293, 3, 23, i, 1+(int)(Math.random()*4)); // -Toimii
 //			}
 //			tkh.poistaSuoritus(141293, 3, 23, 22); //-Toimii
-			tkh.luoSuoritus(141293, 3, 23, 22, 3);
+//			tkh.luoSuoritus(141293, 3, 23, 22, 3);
 			
 			tulostaTaulut();
 			
