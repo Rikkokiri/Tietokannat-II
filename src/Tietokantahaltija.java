@@ -4,6 +4,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	private static Connection connection = null;
 
+	
+	
 	//------- Constructor -----------------------
 
 	public Tietokantahaltija(){
@@ -115,7 +117,6 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
-		//TODO ID:n auto generointi. T�ll� hetkell� oittaa vaan random luvun
 
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
@@ -135,7 +136,6 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public void luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException {
-		//TODO ID:n autogeneointi?
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Vayla(radan_id, par, numero, pituus)" +
 				"VALUES (" + radan_id + "," + par + "," + numero + "," + pituus +
