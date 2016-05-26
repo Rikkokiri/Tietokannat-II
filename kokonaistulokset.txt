@@ -107,6 +107,45 @@ FROM Pelaaja, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa
 WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id
 
 
+//----------------------------------------
+
+RADAN ENNÄTYS
+
+- Miulla on tietty radan id
+	- Sen perusteella valitaan pelit
+		- Sitten selvitetään kyseisten pelien voittajat ja heidän tuloksensa
+		- Suurin tulos on radan ennätys
+
+//Filtteröidään tietyllä radalla pelatut pelit
+SELECT pelin_id
+FROM Peli
+WHERE radan_id = ???
+
+//Selvitetään näiden pelien voittotulokset
+
+
+	SELECT pelin_id, pelaajan_id SUM(heittojen_lkm) AS heittojensumma
+	FROM Suoritus
+	WHERE Suoritus.pelin_id IN 
+			(SELECT pelin_id
+			FROM Peli
+			WHERE radan_id = ???)
+	GROUP BY pelaajan_id) pelien_kokonaistulokset
+
+
+
+SELECT Pelaaja.nimi, MIN(kokonaistulos.summa), Peli.paivamaara
+FROM Pelaaja, Peli, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa
+		FROM Suoritus
+		WHERE Suoritus.pelin_id IN 
+			(SELECT pelin_id
+			FROM Peli
+			WHERE radan_id = 12760)
+		GROUP BY pelaajan_id) kokonaistulos
+WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id
+	AND kokonaistulos.pelin_id = Peli.pelin_id
+
+SELECT pelin_id, pelaajan_id SUM(heittojen_lkm
 
 
 
