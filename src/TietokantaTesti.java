@@ -225,11 +225,11 @@ public class TietokantaTesti {
 			System.out.println("");
 		}
 		
-		// Väylä -taulu
+		// Vï¿½ylï¿½ -taulu
 		
 		rs = stmt.executeQuery("SELECT * FROM Vayla");
 		
-		System.out.println("\nVäylä");
+		System.out.println("\nVï¿½ylï¿½");
 		System.out.println("radan_id    | par        | numero     | pituus" );
 		while (rs.next()){
 			
