@@ -4,6 +4,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	private static Connection connection = null;
 
+	
+	
 	//------- Constructor -----------------------
 
 	public Tietokantahaltija(){
@@ -73,7 +75,11 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public void poistaPelaaja(int pelaajanID) throws SQLException {
 		Statement stmt = null;
 		stmt = connection.createStatement();
-		String sql = "DELETE FROM Pelaaja WHERE pelaajan_id ="+ pelaajanID +";";
+		String sql = "DELETE FROM Pelaaja " +
+				"WHERE pelaaja_id=" + pelaajanID +
+				" AND NOT EXISTS( SELECT * FROM Pelaamassa, Suoritus "+
+				"WHERE Pelaamassa.pelaajan_id=" + pelaajanID +
+				" AND Suoritus.pelaajan_id=" + pelaajanID + ");";
 		stmt.executeUpdate(sql);
 		connection.commit();
 		stmt.close();
@@ -129,7 +135,6 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public void luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException {
-		//TODO ID:n autogeneointi?
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Vayla(radan_id, par, numero, pituus)" +
 				"VALUES (" + radan_id + "," + par + "," + numero + "," + pituus +
@@ -186,13 +191,19 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	//Työn alla! :) - Pilvi 
 
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException {
+		
 		Statement statement = null;
 		statement = connection.createStatement();
-		String sqlQuery = "";
+		String sqlQuery = "SELECT Pelaaja.nimi, kokonaistulos.summa "
+						+ "FROM Pelaaja, ( SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+										+ "FROM Suoritus "
+										+ "WHERE Suoritus.pelin_id = " + pelin_id
+										+ " GROUP BY pelaajan_id) AS kokonaistulos "
+						+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id "
+						+ "ORDER BY kokonaistulos.summa;";
+
 		ResultSet queryResults = statement.executeQuery(sqlQuery);
-		//Print or return something?
 		connection.commit();
-		statement.close();
 		return queryResults;
 	}
 
@@ -215,8 +226,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Pelaaja WHERE pelaajan_id = "+pelaaja_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 	
 	public Connection getConnection(){
@@ -244,25 +257,54 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet radanTiedot(int radan_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Rata WHERE radan_id = "+radan_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 
 	@Override
 	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Vayla WHERE vaylan_numero = "+vaylan_numero+" AND radan_id = "+radan_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 
 	@Override
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
+		
+		Statement stmt = connection.createStatement();
+		String query = "SELECT Pelaaja.nimi, Suoritus.heittojen_lkm "
+					+ "FROM Pelaaja, Suoritus "
+					+ "WHERE Suoritus.pelaajan_id = " + pelaajan_id
+						+ " AND Suoritus.radan_id = " + radan_id
+						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
+						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
+	}
+
+	@Override
+	public ResultSet pelinVoittaja(int pelin_id) throws SQLException {
+		
+		Statement stmt = connection.createStatement();
+		String query = "SELECT Pelaaja.nimi, MAX(kokonaistulos.summa) "
+				+ "FROM Pelaaja, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+				+ "FROM Suoritus "
+				+ "WHERE Suoritus.pelin_id = " + pelin_id
+				+ " GROUP BY pelaajan_id) kokonaistulos "
+				+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id;";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
+	}
+	
+	@Override
+	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	@Override
-	public ResultSet pelajanEnnatysVaylalla(int radan_id, int vaylannumero, int pelaajan_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

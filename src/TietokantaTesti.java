@@ -23,6 +23,10 @@ public class TietokantaTesti {
 			
 			tkh.luoRata("Lideon frisbeegolfrata","A1", 18, "Lieto", "Niilo");
 			tulostaTaulut();
+
+			
+			//Testataan pelin lopputulosek testaamista
+			TulostaPelinTulos(1);
 			
 		} catch (Exception e){
 			System.err.println( e.getClass().getName() + ": " + e.getMessage());
@@ -231,16 +235,20 @@ public class TietokantaTesti {
 
 	}
 	
-	public void TulostaPelinTulos(int pelin_id){
+	public static void TulostaPelinTulos(int pelin_id){
 		
 		try {
 			ResultSet lopputulos = tkh.pelinLopputulos(pelin_id);
-			
+
 			//TODO Tulosta myös pelin päivämäärä
 			System.out.println("Pelin " + pelin_id + " lopputulos");
 			
 			while( lopputulos.next() ){
 				String pelaajan_nimi = lopputulos.getString("nimi");
+				int tulos = lopputulos.getInt("summa");
+				
+				//TODO Teen siistimpi tulostus
+				System.out.println(pelaajan_nimi + " | " + tulos);
 			}
 			
 		} catch (SQLException e) {
