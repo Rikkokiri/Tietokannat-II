@@ -23,9 +23,13 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	//-------------------------------------------
 	
 	/**
-	 * Generoi uuden int-tyyppisen arvon parametrina annetulle taulun uudelle arvolle
-	 * @param name
-	 * @return
+	 * Generoi uuden int-tyyppisen arvon parametrina annetulle taulun uudelle arvolle<br>
+	 * Käytettävät String-tyyppiset arvot ovat:
+	 * <ul><li>Pelaaja</li>
+	 * <li>Rata</li>
+	 * <li>Peli</li></ul>
+	 * @param name Jokin aiemmin mainituista
+	 * @return int
 	 * @throws SQLException
 	 */
 	public int generoiID(String name) throws SQLException{
