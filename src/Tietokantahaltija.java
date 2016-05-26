@@ -346,12 +346,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
 	}
-
-	@Override
-	public ResultSet pelaajanEnnatys(int pelaajan_id, int radan_id) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
+ 
 	@Override
 	public ResultSet radanPar(int radan_id) throws SQLException{
 		Statement stmt = connection.createStatement();

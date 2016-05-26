@@ -235,16 +235,7 @@ public interface TietokantaRajapinta {
 	 * @throws SQLException
 	 */
 	public ResultSet pelaajanEnnatysRadalla(int pelaajan_id, int radan_id) throws SQLException;
-	
-	/**
-	 * Palauttaa pelaajan kaikkien aikaan parhaan tuloksen (vÃ¤hiten heittoja) ja radan, jolla tulos on tehty.
-	 * @param pelaajan_id
-	 * @param radan_id
-	 * @return
-	 * @throws SQLException
-	 */
-	public ResultSet pelaajanEnnatys(int pelaajan_id, int radan_id) throws SQLException;
-	
+
 	/**
 	 * Palauttaa parametrina annetun pelin pelaajien tiedot
 	 * @param pelin_id
@@ -254,9 +245,9 @@ public interface TietokantaRajapinta {
 	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException;
 	
 	/**
-	 * Palauttaa parametrina kysytyn radan väylien yhteisen par
+	 * Palauttaa parametrina kysytyn radan vï¿½ylien yhteisen par
 	 * @param radan_id int
-	 * @return ResultSet, sisältää Radan Par
+	 * @return ResultSet, sisï¿½ltï¿½ï¿½ Radan Par
 	 * @throws SQLException
 	 */
 	public ResultSet radanPar(int radan_id) throws SQLException;
