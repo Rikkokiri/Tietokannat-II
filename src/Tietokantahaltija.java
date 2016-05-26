@@ -228,7 +228,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String sql = "SELECT * FROM Pelaaja WHERE pelaaja_id = "+pelaaja_id+";";
+		String sql = "SELECT * FROM Pelaaja WHERE pelaajan_id = "+pelaaja_id+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		return rs;
 	}
@@ -260,14 +260,16 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet radanTiedot(int radan_id) throws SQLException {
 		Statement stmt = connection.createStatement();
 		String sql = "SELECT * FROM Rata WHERE radan_id = "+radan_id+";";
-		stmt.executeQuery(sql);
-		return null;
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 
 	@Override
 	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Vayla WHERE vaylan_numero = "+vaylan_numero+" AND radan_id = "+radan_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
 	}
 
 	@Override
