@@ -100,10 +100,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public void luoRata(int radanID, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
+	public void luoRata(int radanID, String nimi, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)" +
-				"VALUES (" + radanID + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)" +
+				"VALUES (" + radanID + "," + nimi + "," + radanLuokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
 				");");
 		connection.commit();
 		stmt.close();
@@ -111,8 +111,6 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
-		//TODO ID:n auto generointi. T�ll� hetkell� oittaa vaan random luvun
-
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
 				"VALUES(" + generoiID("Peli") + "," + radan_id + "," + paivamaara + ")");
@@ -150,9 +148,9 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public void poistaPelaajaPelista(int pelaaja_id, int peli_id) throws SQLException {
+	public void poistaPelaajaPelista(int pelaajan_id, int peli_id) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String SQL = "DELETE FROM Pelaamasta WHERE pelaaja_id="+pelaaja_id+" AND peli_id="+peli_id+");";
+		String SQL = "DELETE FROM Pelaamasta WHERE pelaajan_id="+pelaajan_id+" AND peli_id="+peli_id+");";
 		stmt.executeUpdate(SQL);
 		connection.commit();
 		stmt.close();
@@ -235,11 +233,11 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt.close();
 	}
 	@Override
-	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
+	public void luoRata(String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.executeUpdate("INSERT INTO Rata(radan_id, luokitus, vaylien_lkm, osoite, ratamestari)" +
-				"VALUES (" + generoiID("Rata") + "," + luokitus + "," + vaylienLkm + "," + osoite + "," + ratamestari +
-				");");
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)" +
+				"VALUES (" + generoiID("Rata") + ",'" + nimi + "','" + luokitus + "'," + vaylienLkm + ",'" + osoite + "','" + ratamestari +
+				"');");
 		connection.commit();
 		
 	}
@@ -258,6 +256,12 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	@Override
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public ResultSet pelajanEnnatysVaylalla(int radan_id, int vaylannumero, int pelaajan_id) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -67,26 +67,28 @@ public interface TietokantaRajapinta {
 	 * OSOITE CHAR(40)
 	 */
 	/**
-	 * 
+	 * Luo uuden Radan tietokantaan parametrina annettujen arvojen mukaan
+	 * HUOM: INT ID TÄYTYY GENEROIDA METODISSA!
 	 * @param radan_id int
+	 * @param nimi
 	 * @param luokitus
 	 * @param vaylienLkm
 	 * @param osoite
 	 * @param ratamestari
 	 * @throws SQLException
 	 */
-	public void luoRata(int radan_id, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+	public void luoRata(int radan_id, String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
 	
 	/**
 	 * Luo uuden Radan tietokantaan parametrina annettujen arvojen mukaan
-	 * HUOM: INT ID TÄYTYY GENEROIDA METODISSA!
+	 * @param nimi
 	 * @param luokitus
 	 * @param vaylienLkm
 	 * @param osoite
 	 * @param ratamestari
 	 * @throws SQLException
 	 */
-	public void luoRata(String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
+	public void luoRata(String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException;
 
 	/**
 	 * Vaihtaa parametrina annetun radan ratamestarin parametrina annetuksi
@@ -127,11 +129,11 @@ public interface TietokantaRajapinta {
 	
 	/**
 	 * Poistaa pelaajan pelistä
-	 * @param pelaaja_id
+	 * @param pelaajan_id
 	 * @param peli_id
 	 * @throws SQLException
 	 */
-	public void poistaPelaajaPelista(int pelaaja_id, int peli_id) throws SQLException;
+	public void poistaPelaajaPelista(int pelaajan_id, int peli_id) throws SQLException;
 	
 	//------ Suoritus ----------
 	/**
@@ -230,4 +232,7 @@ public interface TietokantaRajapinta {
 	 */
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException;
 	
+
+	public ResultSet pelajanEnnatysVaylalla(int radan_id, int vaylannumero, int pelaajan_id) throws SQLException;
+
 }
