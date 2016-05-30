@@ -1,10 +1,17 @@
 import java.sql.*;
 
+/**
+ * Tietokannan testaamiseen tarkoitttu luokka
+ *
+ */
 public class TietokantaTesti {
 
+	/**{@link Tietokantahaltija}-luokan ilmentymä*/
 	public static Tietokantahaltija tkh;
+	/**{@link Connection}-luokan ilmentymä*/
 	public static Connection connection; 
 	
+	/**Juoksutin*/
 	public static void main(String[] args){
 		try{
 			tkh = new Tietokantahaltija();
@@ -77,7 +84,10 @@ public class TietokantaTesti {
 		}
 	
 	}
-	
+	/**<b>Testaamiseen tarkoitettu metodi</b>
+	 * Tulostaa tietokannan taulut
+	 * @throws SQLException
+	 */
 	public static void tulostaTaulut() throws SQLException{
 
 		// Tulostetaan kaikki taulut
@@ -277,7 +287,10 @@ public class TietokantaTesti {
 		}
 
 	}
-		
+	/**<b>Testaamiseen tarkoitettu metodi</b>
+	 * Tulostaa parametrina annetun pelin tiedot
+	 * @param pelin_id int
+	 */
 	public static void TulostaPelinTulos(int pelin_id){
 		
 		try {
@@ -301,9 +314,9 @@ public class TietokantaTesti {
 		
 	}
 	
-	/**
+	/**<b>Testaamiseen tarkoitettu metodi</b>
 	 * Tulostaa parametrina annetun resultsetin tiedot
-	 * @param rs
+	 * @param rs tulostettava ResultSet
 	 */
 	public static void tulostaResultSet(ResultSet rs){
 		try {

@@ -1,5 +1,9 @@
 import java.sql.*;
 
+/**
+ * Luokka, jossa implementoidaan {@link TietokantaRajapinta}
+ * Luokan ilmentym‰n avulla k‰sitell‰‰n tietokantaa
+ */
 public class Tietokantahaltija implements TietokantaRajapinta {
 
 	private static Connection connection = null;
@@ -7,7 +11,9 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	
 	
 	//------- Constructor -----------------------
-
+	/**
+	 * Tietokantahaltija-luokan ilmentym‰n konstructointi
+	 */
 	public Tietokantahaltija(){
 		try{
 			Class.forName("org.sqlite.JDBC");

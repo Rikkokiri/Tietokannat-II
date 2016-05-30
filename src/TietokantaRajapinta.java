@@ -1,6 +1,10 @@
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Rajapinta, jolla m‰‰ritell‰‰n tietokantaan tarvittavat metodit
+ *
+ */
 public interface TietokantaRajapinta {
 
 	//.o.o.o.o.o.o.o.o.o.o.o.o. LUOMIS-, POISTAMIS- JA P√ÑIVITYSMETODIT .o.o.o.o.o.o.o.o.o.o.o.o.
