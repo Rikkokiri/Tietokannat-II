@@ -326,13 +326,13 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
 		
 		Statement stmt = connection.createStatement();
-		String query = "SELECT Pelaaja.nimi, Suoritus.heittojen_lkm, Peli.paivamaara"
+		String query = "SELECT Pelaaja.nimi, Suoritus.heittojen_lkm, Peli.paivamaara "
 					+ "FROM Pelaaja, Suoritus, Peli "
 					+ "WHERE Suoritus.pelaajan_id = " + pelaajan_id
 						+ " AND Suoritus.radan_id = " + radan_id
 						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
 						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id"
-						+ " AND Peli.pelin_id = Suoritukset.pelin_id";
+						+ " AND Peli.pelin_id = Suoritus.pelin_id";
 		
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
