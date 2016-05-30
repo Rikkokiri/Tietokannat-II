@@ -49,6 +49,24 @@ public class TietokantaTesti {
 			
 //			tulostaTaulut();
 			
+			System.out.println("Radan ennätys");
+			tulostaResultSet(tkh.radanEnnatys(12760));
+			System.out.println("Pelaajien tiedot");
+			tulostaResultSet(tkh.pelaajanTiedot(141293));
+			System.out.println("Radan tiedot");
+			tulostaResultSet(tkh.radanTiedot(12760));
+			System.out.println("Väylän tiedot");
+			tulostaResultSet(tkh.vaylanTiedot(23, 10));
+			System.out.println("Pelaajan suoritukset väylällä");
+			tulostaResultSet(tkh.pelaajanSuorituksetVaylalla(141293, 12760, 4));
+			System.out.println("Pelin voittaja");
+			tulostaResultSet(tkh.pelinVoittaja(1));
+			System.out.println("Pelin pelaajien tiedot");
+			tulostaResultSet(tkh.pelinPelaajienTiedot(1));
+			System.out.println("Pelaajan ennätys radalla");
+			tulostaResultSet(tkh.pelaajanEnnatysRadalla(141293, 12760));
+			System.out.println("Radan par");
+			tulostaResultSet(tkh.radanPar(12760));
 			
 			//Testataan pelin lopputulosek testaamista
 			TulostaPelinTulos(1);

@@ -284,7 +284,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	@Override
 	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String sql = "SELECT * FROM Vayla WHERE vaylan_numero = "+vaylan_numero+" AND radan_id = "+radan_id+";";
+		String sql = "SELECT * FROM Vayla WHERE numero = "+vaylan_numero+" AND radan_id = "+radan_id+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		return rs;
 	}
