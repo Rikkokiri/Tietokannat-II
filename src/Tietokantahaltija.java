@@ -64,6 +64,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		return tmp;
 	}
 
+	//===================== PELAAJA =================================
+	
 	@Override
 	public void luoPelaaja(int pelaajanID, String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
 		Statement stmt = null;
@@ -75,6 +77,16 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 
 	}
 
+	@Override
+	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
+		Statement stmt = null;
+		stmt = connection.createStatement();
+		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", '" + pelaajanNimi + "', '" + puhnum + "', '" + kotipaikka + "');";
+		stmt.executeUpdate(sql);
+		connection.commit();
+		stmt.close();
+	}
+	
 	@Override
 	public void poistaPelaaja(int pelaajanID) throws SQLException {
 		Statement stmt = null;
@@ -109,6 +121,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		stmt.close();
 	}
 
+	//===================== RATA =================================
+	
 	@Override
 	public void luoRata(int radanID, String nimi, String radanLuokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
@@ -120,14 +134,16 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
+	public void luoRata(String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
-		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
-				"VALUES(" + generoiID("Peli") + "," + radan_id + ",'" + paivamaara + "')");
+		stmt.executeUpdate("INSERT INTO Rata(radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)" +
+				"VALUES (" + generoiID("Rata") + ",'" + nimi + "','" + luokitus + "'," + vaylienLkm + ",'"
+				+ osoite + "','" + ratamestari +
+				"');");
 		connection.commit();
-		stmt.close();
+		
 	}
-
+	
 	@Override
 	public void vaihdaRatamestari(int radan_id, String uusiRatamestari) throws SQLException {
 		Statement stmt = connection.createStatement();
@@ -136,13 +152,24 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		connection.commit();
 		stmt.close();
 	}
-
+	
 	@Override
 	public void luoVayla(int radan_id, int par, int numero, int pituus) throws SQLException {
 		Statement stmt = connection.createStatement();
 		stmt.executeUpdate("INSERT INTO Vayla(radan_id, par, numero, pituus)" +
 				"VALUES (" + radan_id + "," + par + "," + numero + "," + pituus +
 				");");
+		connection.commit();
+		stmt.close();
+	}
+	
+	//===================== PELI =================================
+	
+	@Override
+	public void luoPeli(int radan_id, String paivamaara) throws SQLException {
+		Statement stmt = connection.createStatement();
+		stmt.executeUpdate("INSERT INTO Peli(pelin_id, radan_id, paivamaara)" +
+				"VALUES(" + generoiID("Peli") + "," + radan_id + ",'" + paivamaara + "')");
 		connection.commit();
 		stmt.close();
 	}
@@ -164,6 +191,8 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		connection.commit();
 		stmt.close();
 	}
+	
+	//===================== SUORITUS =================================
 
 	@Override
 	public void luoSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
@@ -175,8 +204,7 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		connection.commit();
 		stmt.close();
 	}
-	
-	//Hoidan -Ville
+
 	@Override
 	public void poistaSuoritus(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero) throws SQLException {
 		Statement stmt = connection.createStatement();
@@ -187,13 +215,21 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 	}
 
 	@Override
-	/**
-	 * Palauttaa listauksen yksittäisten pelaajien kokonaistuloksista pelissä pelin_id.
-	 * 
+	public void korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
+			throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "UPDATE Suoritus set heittojen_lkm = "+heittojen_lkm+" WHERE pelaajan_id = "+pelaajan_id+" AND pelin_id = "+pelin_id+" AND radan_id = "+radan_id+" AND vaylannumero = "+vaylannumero+";";
+		stmt.executeUpdate(sql);
+		stmt.close();
+		connection.commit();
+	}
+	
+	
+	//===================== KYSELYT =================================
+	
+	/* PELIN LOPPUTULOS(non-Javadoc)
+	 * @see TietokantaRajapinta#pelinLopputulos(int)
 	 */
-
-	//Työn alla! :) - Pilvi 
-
 	public ResultSet pelinLopputulos(int pelin_id) throws SQLException {
 		
 		Statement statement = null;
@@ -210,100 +246,10 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		connection.commit();
 		return queryResults;
 	}
-
-	@Override
-	public ResultSet radanEnnatys(int radan_id) throws SQLException {
-		Statement stmt = connection.createStatement();
-		
-		//ResultSet queryResults = stmt.executeQuery("SELECT * FROM Suoritus WHERE radan_id = "+radan_id+" AND heittojen_lkm = SELECT MIN(heittojen_lkm) FROM SUORITUS WHERE radan_id = "+radan_id+";");
-		
-		String query = "SELECT Pelaaja.nimi, MIN(kokonaistulos.summa), Peli.paivamaara "
-					+ "FROM Pelaaja, Peli, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
-										+ "FROM Suoritus "
-										+ "WHERE Suoritus.pelin_id IN " 
-														+ "(SELECT pelin_id "
-														+ "FROM Peli "
-														+ "WHERE radan_id = " + radan_id + ") "
-										+ "GROUP BY pelaajan_id, pelin_id) kokonaistulos "
-					+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id AND kokonaistulos.pelin_id = Peli.pelin_id;";
-		
-		ResultSet rs = stmt.executeQuery(query);
-		return rs;
-	}
-
-	@Override
-	public void korjaaHeittojenLkm(int pelaajan_id, int pelin_id, int radan_id, int vaylannumero, int heittojen_lkm)
-			throws SQLException {
-		Statement stmt = connection.createStatement();
-		String sql = "UPDATE Suoritus set heittojen_lkm = "+heittojen_lkm+" WHERE pelaajan_id = "+pelaajan_id+" AND pelin_id = "+pelin_id+" AND radan_id = "+radan_id+" AND vaylannumero = "+vaylannumero+";";
-		stmt.executeUpdate(sql);
-		stmt.close();
-		connection.commit();
-	}
-
-	@Override
-	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
-		Statement stmt = connection.createStatement();
-		String sql = "SELECT * FROM Pelaaja WHERE pelaajan_id = "+pelaaja_id+";";
-		ResultSet rs = stmt.executeQuery(sql);
-		return rs;
-	}
 	
-	public Connection getConnection(){
-		return connection;
-	}
-	
-	@Override
-	public void luoPelaaja(String pelaajanNimi, String puhnum, String kotipaikka) throws SQLException {
-		Statement stmt = null;
-		stmt = connection.createStatement();
-		String sql = "INSERT INTO Pelaaja VALUES (" + generoiID("Pelaaja") + ", '" + pelaajanNimi + "', '" + puhnum + "', '" + kotipaikka + "');";
-		stmt.executeUpdate(sql);
-		connection.commit();
-		stmt.close();
-	}
-	@Override
-	public void luoRata(String nimi, String luokitus, int vaylienLkm, String osoite, String ratamestari) throws SQLException {
-		Statement stmt = connection.createStatement();
-		stmt.executeUpdate("INSERT INTO Rata(radan_id, nimi, luokitus, vaylien_lkm, osoite, ratamestari)" +
-				"VALUES (" + generoiID("Rata") + ",'" + nimi + "','" + luokitus + "'," + vaylienLkm + ",'"
-				+ osoite + "','" + ratamestari +
-				"');");
-		connection.commit();
-		
-	}
-
-	@Override
-	public ResultSet radanTiedot(int radan_id) throws SQLException {
-		Statement stmt = connection.createStatement();
-		String sql = "SELECT * FROM Rata WHERE radan_id = "+radan_id+";";
-		ResultSet rs = stmt.executeQuery(sql);
-		return rs;
-	}
-
-	@Override
-	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
-		Statement stmt = connection.createStatement();
-		String sql = "SELECT * FROM Vayla WHERE numero = "+vaylan_numero+" AND radan_id = "+radan_id+";";
-		ResultSet rs = stmt.executeQuery(sql);
-		return rs;
-	}
-
-	@Override
-	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
-		
-		Statement stmt = connection.createStatement();
-		String query = "SELECT Pelaaja.nimi, Suoritus.heittojen_lkm "
-					+ "FROM Pelaaja, Suoritus "
-					+ "WHERE Suoritus.pelaajan_id = " + pelaajan_id
-						+ " AND Suoritus.radan_id = " + radan_id
-						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
-						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id";
-		
-		ResultSet rs = stmt.executeQuery(query);
-		return rs;
-	}
-
+	/* PELIN VOITTAJA (non-Javadoc)
+	 * @see TietokantaRajapinta#pelinVoittaja(int)
+	 */
 	@Override
 	public ResultSet pelinVoittaja(int pelin_id) throws SQLException {
 		
@@ -318,17 +264,83 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
 	}
-	
+
+	/* RADAN ENNÄTYS
+	 * @see TietokantaRajapinta#radanEnnatys(int)
+	 */
 	@Override
-	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException {
+	public ResultSet radanEnnatys(int radan_id) throws SQLException {
 		Statement stmt = connection.createStatement();
-		String sql = "SELECT nimi, puhnum, kotipaikka "
-				+ "FROM Pelaaja JOIN Pelaamassa USING ( pelaajan_id ) "
-				+ "WHERE pelin_id = " + pelin_id + ";";
+			
+		String query = "SELECT Pelaaja.nimi, MIN(kokonaistulos.summa), Peli.paivamaara "
+					+ "FROM Pelaaja, Peli, (SELECT pelin_id, pelaajan_id, SUM(heittojen_lkm) AS summa "
+										+ "FROM Suoritus "
+										+ "WHERE Suoritus.pelin_id IN " 
+														+ "(SELECT pelin_id "
+														+ "FROM Peli "
+														+ "WHERE radan_id = " + radan_id + ") "
+										+ "GROUP BY pelaajan_id, pelin_id) kokonaistulos "
+					+ "WHERE kokonaistulos.pelaajan_id = Pelaaja.pelaajan_id AND kokonaistulos.pelin_id = Peli.pelin_id;";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
+	}
+
+	/* PELAAJAN TIEDOT
+	 * @see TietokantaRajapinta#pelaajanTiedot(int)
+	 */
+	@Override
+	public ResultSet pelaajanTiedot(int pelaaja_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Pelaaja WHERE pelaajan_id = "+pelaaja_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
+	}
+	
+	/* RADAN TIEDOT
+	 * @see TietokantaRajapinta#radanTiedot(int)
+	 */
+	@Override
+	public ResultSet radanTiedot(int radan_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Rata WHERE radan_id = "+radan_id+";";
 		ResultSet rs = stmt.executeQuery(sql);
 		return rs;
 	}
 
+	/* VÄYLÄN TIEDOT
+	 * @see TietokantaRajapinta#vaylanTiedot(int, int)
+	 */
+	@Override
+	public ResultSet vaylanTiedot(int radan_id, int vaylan_numero) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT * FROM Vayla WHERE numero = "+vaylan_numero+" AND radan_id = "+radan_id+";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
+	}
+
+	/* PELAAJAN SUORITUKSET VÄYLÄLLÄ
+	 * @see TietokantaRajapinta#pelaajanSuorituksetVaylalla(int, int, int)
+	 */
+	@Override
+	public ResultSet pelaajanSuorituksetVaylalla(int pelaajan_id, int radan_id, int vaylan_numero) throws SQLException {
+		
+		Statement stmt = connection.createStatement();
+		String query = "SELECT Pelaaja.nimi, Suoritus.heittojen_lkm "
+					+ "FROM Pelaaja, Suoritus "
+					+ "WHERE Suoritus.pelaajan_id = " + pelaajan_id
+						+ " AND Suoritus.radan_id = " + radan_id
+						+ " AND Suoritus.vaylannumero = " + vaylan_numero 
+						+ " AND Pelaaja.pelaajan_id = Suoritus.pelaajan_id"
+						+ " AND Peli.pelin_id = Suoritukset.pelin_id";
+		
+		ResultSet rs = stmt.executeQuery(query);
+		return rs;
+	}
+	
+	/* PELAAJAN ENNÄTYS RADALLA
+	 * @see TietokantaRajapinta#pelaajanEnnatysRadalla(int, int)
+	 */
 	@Override
 	public ResultSet pelaajanEnnatysRadalla(int pelaajan_id, int radan_id) throws SQLException {
 		
@@ -346,14 +358,36 @@ public class Tietokantahaltija implements TietokantaRajapinta {
 		ResultSet rs = stmt.executeQuery(query);
 		return rs;
 	}
- 
+	
+	/* PELIN PELAAJIEN TIEDOT
+	 * @see TietokantaRajapinta#pelinPelaajienTiedot(int)
+	 */
+	@Override
+	public ResultSet pelinPelaajienTiedot(int pelin_id) throws SQLException {
+		Statement stmt = connection.createStatement();
+		String sql = "SELECT nimi, puhnum, kotipaikka "
+				+ "FROM Pelaaja JOIN Pelaamassa USING ( pelaajan_id ) "
+				+ "WHERE pelin_id = " + pelin_id + ";";
+		ResultSet rs = stmt.executeQuery(sql);
+		return rs;
+	}
+
+	/* RADAN PAR
+	 * @see TietokantaRajapinta#radanPar(int)
+	 */
 	@Override
 	public ResultSet radanPar(int radan_id) throws SQLException{
 		Statement stmt = connection.createStatement();
-		String SQL = "SELECT SUM(Par) FROM Vayla WHERE radan_id="+radan_id+";";
+		String SQL = "SELECT sum(par) FROM Vayla WHERE radan_id="+radan_id+";";
 		ResultSet rs = stmt.executeQuery(SQL);
-		
 		return rs;
+	}
+	
+	
+	//===================== APUMETODIT =================================
+	
+	public Connection getConnection(){
+		return connection;
 	}
 	
 }
