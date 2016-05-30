@@ -49,23 +49,23 @@ public class TietokantaTesti {
 			
 //			tulostaTaulut();
 			
-			System.out.println("Radan ennätys");
+			System.out.println("\nRadan ennätys");
 			tulostaResultSet(tkh.radanEnnatys(12760));
-			System.out.println("Pelaajien tiedot");
+			System.out.println("\nPelaajien tiedot");
 			tulostaResultSet(tkh.pelaajanTiedot(141293));
-			System.out.println("Radan tiedot");
+			System.out.println("\nRadan tiedot");
 			tulostaResultSet(tkh.radanTiedot(12760));
-			System.out.println("Väylän tiedot");
+			System.out.println("\nVäylän tiedot");
 			tulostaResultSet(tkh.vaylanTiedot(23, 10));
-			System.out.println("Pelaajan suoritukset väylällä");
+			System.out.println("\nPelaajan suoritukset väylällä");
 			tulostaResultSet(tkh.pelaajanSuorituksetVaylalla(141293, 12760, 4));
-			System.out.println("Pelin voittaja");
+			System.out.println("\nPelin voittaja");
 			tulostaResultSet(tkh.pelinVoittaja(1));
-			System.out.println("Pelin pelaajien tiedot");
+			System.out.println("\nPelin pelaajien tiedot");
 			tulostaResultSet(tkh.pelinPelaajienTiedot(1));
-			System.out.println("Pelaajan ennätys radalla");
+			System.out.println("\nPelaajan ennätys radalla");
 			tulostaResultSet(tkh.pelaajanEnnatysRadalla(141293, 12760));
-			System.out.println("Radan par");
+			System.out.println("\nRadan par");
 			tulostaResultSet(tkh.radanPar(12760));
 			
 			//Testataan pelin lopputulosek testaamista
